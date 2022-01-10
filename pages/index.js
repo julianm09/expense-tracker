@@ -3,6 +3,7 @@ import styled from "styled-components";
 import MyCalender from "../comps/Calender";
 import "react-calendar/dist/Calendar.css";
 import DisplayExpense from "../comps/DisplayExpense";
+import AddButton from "../comps/Button";
 
 const Cont = styled.div`
   display: flex;
@@ -34,6 +35,7 @@ export default function Home() {
     <Cont>
       <MyCalender date={date} setDate={setDate} />
       <DisplayExpense expenses={expenses} date={date} />
+     <AddButton/>
     </Cont>
   );
 }
