@@ -34,6 +34,7 @@ export default function Home() {
     <Cont>
       <MyCalender date={date} setDate={setDate} />
       <DisplayExpense expenses={expenses} date={date} />
+      <Button/>
     </Cont>
   );
 }
