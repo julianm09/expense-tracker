@@ -15,6 +15,11 @@ const Cont = styled.div`
 export default function Home() {
   const [date, setDate] = useState("");
 
+  const [expenseName, setExpenseName] = useState(date);
+  const [expensePrice, setExpensePrice] = useState(0);
+  const [expenseType, setExpenseType] = useState('');
+
+
   const [expenses, setExpenses] = useState({
     "2022-01-08": [
       { name: "save on foods", price: 101.22, type: "groceries" },
@@ -30,8 +35,23 @@ export default function Home() {
     ],
   });
 
+  const addExpense = () => {
+    /* expenses["2022-01-08"].push({ name: "shell", price: 55.21, type: "gasoline" }); */
+
+    setExpenses({
+      ...expenses,
+      "2022-01-09": [
+        ...expenses["2022-01-09"],
+        { name: "shell", price: 55.21, type: "gasoline" },
+      ],
+    });
+
+    console.log(expenses);
+  };
+
   return (
     <Cont>
+      <button onClick={addExpense} />
       <MyCalender date={date} setDate={setDate} />
       <DisplayExpense expenses={expenses} date={date} />
     </Cont>
