@@ -5,7 +5,6 @@ import "react-calendar/dist/Calendar.css";
 import DisplayExpense from "../comps/DisplayExpense";
 import AddButton from "../comps/Button";
 
-
 const Cont = styled.div`
   display: flex;
   justify-content: center;
@@ -36,7 +35,7 @@ export default function Home() {
     <Cont>
       <MyCalender date={date} setDate={setDate} />
       <DisplayExpense expenses={expenses} date={date} />
-      <AddButton/>
+
     </Cont>
   );
 }
