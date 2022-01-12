@@ -4,15 +4,13 @@ import MyCalender from "../comps/Calender";
 import "react-calendar/dist/Calendar.css";
 import DisplayExpense from "../comps/DisplayExpense";
 import PopUp from "../comps/popup";
-import ItemHeadings from "../comps/ItemChartHeadings";
-import Itemlist from "../comps/itemChartItems";
-import AddButton from "../comps/Button";
 
 const Cont = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
+  border-radius: 20px;
   flex-direction: column;
 `;
 
@@ -38,6 +36,7 @@ export default function Home() {
     <Cont>
       <MyCalender date={date} setDate={setDate} />
       <DisplayExpense expenses={expenses} date={date} />
+      <PopUp />
     </Cont>
   );
 }

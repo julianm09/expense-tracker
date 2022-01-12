@@ -3,10 +3,6 @@ import styled from "styled-components";
 import MyCalender from "../comps/Calender";
 import "react-calendar/dist/Calendar.css";
 import DisplayExpense from "../comps/DisplayExpense";
-import PopUp from "../comps/popup";
-import ItemHeadings from "../comps/ItemChartHeadings";
-import Itemlist from "../comps/itemChartItems";
-import AddButton from "../comps/Button";
 
 const Cont = styled.div`
   display: flex;
