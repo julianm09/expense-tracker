@@ -5,6 +5,7 @@ import "react-calendar/dist/Calendar.css";
 import DisplayExpense from "../comps/DisplayExpense";
 import ItemHeadings from "../comps/ItemChartHeadings";
 import Itemlist from "../comps/itemChartItems";
+import AddButton from "../comps/Button";
 
 const Cont = styled.div`
   display: flex;
@@ -36,8 +37,6 @@ export default function Home() {
     <Cont>
       <MyCalender date={date} setDate={setDate} />
       <DisplayExpense expenses={expenses} date={date} />
-      <ItemHeadings/>
-      <Itemlist />
     </Cont>
   );
 }
