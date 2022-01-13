@@ -7,21 +7,23 @@ font-size:16px;
 background-color: #000000;
 color:#FFFFFF;
 border-radius:10px;
-height: 58px;
-width: 184px;
+height: 50px;
+width: 180px;
 border: none;
-transition:0.5s ease;
+transition:0.1s ease;
+cursor: pointer;
 
 &:hover{
-    width: 200px;
+    width: 190px;
 }
 
 `;
 
 const AddButton = ({
-    text = "ADD ITEM"
+    text = "ADD ITEM",
+    handleClick
 }) => {
-    return (<ButtonUI>{text}</ButtonUI>
+    return (<ButtonUI onClick={handleClick}>{text}</ButtonUI>
     );
 }
 

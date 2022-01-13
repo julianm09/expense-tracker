@@ -3,10 +3,12 @@ import styled from "styled-components";
 
 const Cont = styled.div`
   display: flex;
-  width: 603px;
+  width: 80%;
   height: 71px;
   border-top: 0.5px solid #737373;
+  border-bottom: 0.5px solid #737373;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const Title = styled.p`
@@ -31,7 +33,7 @@ const Iconcont = styled.div`
 `;
 
 
-export default function Itemheadings({}) {
+export default function Itemheadings() {
 
   return (
     <Cont>
@@ -40,11 +42,11 @@ export default function Itemheadings({}) {
         </Titlecont>
 
         <Titlecont>
-            <Title>Item Name</Title>
+            <Title>Type</Title>
         </Titlecont>
 
         <Titlecont>
-            <Title>Item Name</Title>
+            <Title>Amount</Title>
         </Titlecont>
 
         <Iconcont>

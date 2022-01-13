@@ -1,5 +1,36 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import AddButton from "./Button";
+
+const Overlay = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  flex-direction: column;
+
+  @media(max-width: 1000px){
+    width: 100%;
+  }
+`;
+
+const Background = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.79);
+  flex-direction: column;
+  cursor: pointer;
+`;
 
 const Cont = styled.div`
   display: flex;
@@ -24,6 +55,10 @@ const XButton = styled.button`
   width: 30px;
   height: 30px;
   color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 `;
 
 const TextCont = styled.div`
@@ -39,6 +74,7 @@ const Box = styled.input`
   height: 60px;
   border: 0.5px solid #000;
   border-radius: 10px;
+  padding: 0 15px;
 `;
 
 const Title = styled.p``;
@@ -52,17 +88,19 @@ const BottomDiv = styled.div`
   margin-top: 10%;
   flex-direction: column;
 `;
-const AddButton = styled.button`
+/* const AddButton = styled.button`
   width: 144px;
   height: 54px;
   background-color: #000;
   color: #fff;
   border-radius: 10px;
-`;
-export default function PopUp() {
+`; */
+export default function PopUp({setShowAddItem, addExpense}) {
   return (
+    <Overlay>
+        <Background onClick={() => setShowAddItem(false)} />
     <Cont>
-      <XButton>x</XButton>
+      <XButton onClick={() => setShowAddItem(false)}>x</XButton>
       <TopDiv>
         <TextCont>
           <Title>Item Name</Title>
@@ -77,9 +115,10 @@ export default function PopUp() {
           <Box></Box>
         </TextCont>
         <BottomDiv>
-          <AddButton>ADD</AddButton>
+          <AddButton handleClick={addExpense}/>
         </BottomDiv>
       </TopDiv>
     </Cont>
+    </Overlay>
   );
 }

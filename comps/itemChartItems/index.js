@@ -4,11 +4,11 @@ import { AiFillDelete, AiOutlineEdit } from "react-icons/ai";
 
 const Cont = styled.div`
   display: flex;
-  width: 603px;
+  width: 80%;
   height: 71px;
   justify-content: space-between;
-  border-top: 0.5px solid #737373;
   border-bottom: 0.5px solid #737373;
+  align-items: center;
 
 `;
 
