@@ -11,6 +11,8 @@ import DisplayTotal from "../comps/DisplayTotal";
 import ItemChart from "../comps/ItemChart";
 
 export default function Home() {
+
+  //selected date
   const [date, setDate] = useState("");
 
   //form inputs
