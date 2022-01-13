@@ -7,6 +7,144 @@ import PopUp from "../comps/popup";
 import Itemheadings from "../comps/ItemChartHeadings";
 import Itemlist from "../comps/itemChartItems";
 import AddButton from "../comps/Button";
+import DisplayTotal from "../comps/DisplayTotal";
+import ItemChart from "../comps/ItemChart";
+
+export default function Home() {
+  const [date, setDate] = useState("");
+
+  //form inputs
+  const [expenseName, setExpenseName] = useState("");
+  const [expensePrice, setExpensePrice] = useState(null);
+  const [expenseType, setExpenseType] = useState("");
+
+  //hook to show and hide popup
+  const [showAddItem, setShowAddItem] = useState(false);
+
+  // default data
+  const [expenses, setExpenses] = useState([
+    {
+      date: "2022-01-12",
+      expenses: [
+        { name: "save on foods", price: 101.22, type: "groceries" },
+        { name: "shell", price: 55.21, type: "gasoline" },
+      ],
+    },
+    {
+      date: "2022-01-13",
+      expenses: [
+        { name: "save on foods", price: 101.22, type: "groceries" },
+        { name: "shell", price: 55.21, type: "gasoline" },
+      ],
+    },
+  ]);
+
+  //daily expense array
+  const [filteredExpenses, setFilteredExpenses] = useState([]);
+
+  //update when date is changed
+  useEffect(() => {
+    filterDate();
+  }, [date]);
+
+  //upate when expenses are added
+  useEffect(() => {
+    filterDate();
+  }, [expenses]);
+
+
+  //filter expenses by date
+  const filterDate = () => {
+    const filteredDate = expenses.filter((expense) => expense.date === date);
+
+    if (filteredDate[0]) {
+      setFilteredExpenses(filteredDate[0].expenses);
+    } else {
+      setFilteredExpenses([]);
+    }
+  };
+
+  //add an expense
+  const addExpense = () => {
+    if (filteredExpenses.length > 0) {
+      console.log([...expenses.filter((expense) => expense.date != date)]);
+      setExpenses([
+        ...expenses.filter((expense) => expense.date != date),
+        {
+          date: date,
+          expenses: [
+            ...filteredExpenses,
+            { name: expenseName, price: expensePrice, type: expenseType },
+          ],
+        },
+      ]);
+    } else {
+      setExpenses([
+        ...expenses,
+        {
+          date: date,
+          expenses: [
+            ...filteredExpenses,
+            { name: expenseName, price: expensePrice, type: expenseType },
+          ],
+        },
+      ]);
+    }
+  };
+
+  // show popup form
+  const showItemMenu = () => {
+    setShowAddItem(!showAddItem);
+  };
+
+  //Filter expenses by date
+
+  //Filter expenses by name
+
+  //Filter expenses by amount
+
+  //Add Total expenses from day
+
+  //Set Daily Budget
+
+  //Calculate Budget and Total Expense Difference
+
+  //Delete an Expense
+
+  //Edit an Expense
+
+  return (
+    <Cont>
+      <Column>
+        <MyCalender date={date} setDate={setDate} />
+      </Column>
+
+      <Column>
+      <DisplayTotal/>
+        <Itemheadings />
+        <ItemChart expenses={expenses}
+              date={date}
+              filteredExpenses={filteredExpenses}/>
+        <AddButton handleClick={showItemMenu} />
+      </Column>
+
+      {showAddItem ? (
+        <PopUp
+          setExpensePrice={setExpensePrice}
+          expensePrice={expensePrice}
+          setExpenseName={setExpenseName}
+          expenseName={expenseName}
+          setExpenseType={setExpenseType}
+          expenseType={expenseType}
+          setShowAddItem={setShowAddItem}
+          addExpense={addExpense}
+        />
+      ) : (
+        <></>
+      )}
+    </Cont>
+  );
+}
 
 const Cont = styled.div`
   display: flex;
@@ -18,6 +156,7 @@ const Cont = styled.div`
 
   @media (max-width: 1000px) {
     flex-direction: column;
+    height: auto;
   }
 `;
 
@@ -31,71 +170,3 @@ const Column = styled.div`
     width: 100%;
   }
 `;
-
-export default function Home() {
-  const [date, setDate] = useState("");
-
-  const [expenseName, setExpenseName] = useState("default");
-  const [expensePrice, setExpensePrice] = useState(0);
-  const [expenseType, setExpenseType] = useState("deault");
-
-  const [showAddItem, setShowAddItem] = useState(false);
-
-  const [expenses, setExpenses] = useState({
-    "2022-01-08": [
-      { name: "save on foods", price: 101.22, type: "groceries" },
-      { name: "shell", price: 55.21, type: "gasoline" },
-    ],
-    "2022-01-09": [
-      { name: "earls", price: 150.45, type: "dining" },
-      { name: "starbucks", price: 5.24, type: "coffee" },
-    ],
-    "2022-01-10": [
-      { name: "cineplex", price: 24.28, type: "night out" },
-      { name: "rent", price: 1250, type: "rent" },
-    ],
-  });
-
-  const addExpense = () => {
-    setExpenses({
-      ...expenses,
-      [date] : [
-        ...expenses[date],
-        { name: expenseName, price: 55.21, type: "gasoline" },
-      ],
-    });
-
-    console.log(expenses);
-  };
-
-  const showItemMenu = () => {
-    setShowAddItem(!showAddItem);
-  };
-
-  return (
-    <Cont>
-      <Column>
-        <MyCalender date={date} setDate={setDate} />
-      </Column>
-
-      <Column>
-        <button onClick={addExpense} />
-        <Itemheadings />
-        <DisplayExpense expenses={expenses} date={date} />
-        <AddButton handleClick={showItemMenu} />
-      </Column>
-
-      {showAddItem ? (
-        <PopUp
-          setExpensePrice={setExpensePrice}
-          setExpenseName={setExpenseName}
-          setExpenseType={setExpenseType}
-          setShowAddItem={setShowAddItem}
-          addExpense={addExpense}
-        />
-      ) : (
-        <></>
-      )}
-    </Cont>
-  );
-}

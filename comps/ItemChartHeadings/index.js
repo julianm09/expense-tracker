@@ -4,17 +4,17 @@ import styled from "styled-components";
 const Cont = styled.div`
   display: flex;
   width: 80%;
-  height: 71px;
+  height: 75px;
   border-top: 0.5px solid #737373;
   border-bottom: 0.5px solid #737373;
   justify-content: space-between;
   align-items: center;
 `;
 
-const Title = styled.p`
-  font-size: 24px;
+const Title = styled.div`
+  font-size: 18px;
   color: #737373;
-  font-weight: 400;
+  font-weight: 700;
 `;
 
 const Titlecont = styled.div`
@@ -38,7 +38,7 @@ export default function Itemheadings() {
   return (
     <Cont>
         <Titlecont>
-            <Title>Item Name</Title>
+            <Title>Expense</Title>
         </Titlecont>
 
         <Titlecont>

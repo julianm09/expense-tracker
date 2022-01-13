@@ -95,7 +95,7 @@ const BottomDiv = styled.div`
   color: #fff;
   border-radius: 10px;
 `; */
-export default function PopUp({setShowAddItem, addExpense}) {
+export default function PopUp({setShowAddItem, addExpense, setExpensePrice, setExpenseName, setExpenseType, expensePrice, expenseName, expenseType}) {
   return (
     <Overlay>
         <Background onClick={() => setShowAddItem(false)} />
@@ -104,15 +104,15 @@ export default function PopUp({setShowAddItem, addExpense}) {
       <TopDiv>
         <TextCont>
           <Title>Item Name</Title>
-          <Box></Box>
+          <Box onChange={(e) => setExpenseName(e.target.value)} value={expenseName}/>
         </TextCont>
         <TextCont>
           <Title>Item Price</Title>
-          <Box></Box>
+          <Box type={"number"} step="0.01" onChange={(e) => setExpensePrice(e.target.value)} value={expensePrice}/>
         </TextCont>
         <TextCont>
           <Title>Type</Title>
-          <Box></Box>
+          <Box onChange={(e) => setExpenseType(e.target.value)} value={expenseType}/>
         </TextCont>
         <BottomDiv>
           <AddButton handleClick={addExpense}/>

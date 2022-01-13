@@ -4,8 +4,8 @@ import { AiFillDelete, AiOutlineEdit } from "react-icons/ai";
 
 const Cont = styled.div`
   display: flex;
-  width: 80%;
-  height: 71px;
+  width: 100%;
+  height: 75px;
   justify-content: space-between;
   border-bottom: 0.5px solid #737373;
   align-items: center;
@@ -16,18 +16,18 @@ const Itemcont = styled.div`
   width: 151px;
 `;
 
-const Title = styled.p`
-  font-size: 24px;
+const Title = styled.div`
+  font-size: 18px;
   color: #737373;
 `;
 
 const Iconcont = styled.div`
-    width: 87px;
+    width: 72px;
     height: 71px;
     justify-content: center;
     display: flex;
     align-items: center;
-    font-size: 34px;
+    font-size: 24px;
     color: #6D6D6D;
 
 `;
