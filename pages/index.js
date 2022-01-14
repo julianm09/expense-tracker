@@ -70,7 +70,6 @@ export default function Home() {
   //add an expense
   const addExpense = () => {
     if (filteredExpenses.length > 0) {
-      console.log([...expenses.filter((expense) => expense.date != date)]);
       setExpenses([
         ...expenses.filter((expense) => expense.date != date),
         {
@@ -113,6 +112,18 @@ export default function Home() {
   //Calculate Budget and Total Expense Difference
 
   //Delete an Expense
+  const deleteExpense = (i) => {
+    console.log(filteredExpenses.filter(expense => expense.name != i))
+    setExpenses([
+      ...expenses.filter((expense) => expense.date != date),
+      {
+        date: date,
+        expenses: [
+          ...filteredExpenses.filter(expense => expense.name != i)
+        ],
+      },
+    ]);
+  }
 
   //Edit an Expense
 
@@ -130,7 +141,9 @@ export default function Home() {
         <Itemheadings />
         <ItemChart expenses={expenses}
               date={date}
-              filteredExpenses={filteredExpenses}/>
+              filteredExpenses={filteredExpenses}
+              deleteExpense={deleteExpense}
+              />
         <AddButton handleClick={showItemMenu} />
       </Column>
 
