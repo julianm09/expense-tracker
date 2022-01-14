@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import AddButton from "./Button";
-import Dropdown from "./dropdown";
+import { Dropdown } from "semantic-ui-react";
 
 const Overlay = styled.div`
   display: flex;
@@ -106,12 +106,6 @@ export default function PopUp({
   expenseName,
   expenseType,
 }) {
-  const options = [
-    { key: 1, text: "Choice 1", value: 1 },
-    { key: 2, text: "Choice 2", value: 2 },
-    { key: 3, text: "Choice 3", value: 3 },
-  ];
-
   return (
     <Overlay>
       <Background onClick={() => setShowAddItem(false)} />
