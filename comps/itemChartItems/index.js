@@ -40,6 +40,7 @@ export default function Itemlist({
     Itemname="popeyes",
     Itemtype="Food",
     Itemamount="$10.64",
+    deleteExpense
 
 }) {
 
@@ -59,7 +60,7 @@ export default function Itemlist({
 
         <Iconcont>
                 <AiOutlineEdit/>
-                <AiFillDelete />
+                <AiFillDelete onClick={() => deleteExpense(Itemname)}/>
         </Iconcont>
 
         

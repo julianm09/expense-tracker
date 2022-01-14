@@ -19,7 +19,7 @@ const Message = styled.div`
   height: 150px;
 `;
 
-export default function DisplayExpense({ expenses, date, filteredExpenses }) {
+export default function DisplayExpense({ expenses, date, filteredExpenses, deleteExpense }) {
   return (
     <Cont>
       {filteredExpenses.length > 0
@@ -29,6 +29,8 @@ export default function DisplayExpense({ expenses, date, filteredExpenses }) {
               Itemname={expense.name}
               Itemtype={expense.type}
               Itemamount={expense.price}
+              expenses={expenses}
+              deleteExpense={deleteExpense}
             />
           ))
         : <Message>Add an Expense</Message>}
