@@ -9,6 +9,7 @@ import Itemlist from "../comps/itemChartItems";
 import AddButton from "../comps/Button";
 import DisplayTotal from "../comps/DisplayTotal";
 import ItemChart from "../comps/ItemChart";
+import SetBudget from '../comps/SetBudjet';
 
 export default function Home() {
 
@@ -115,8 +116,11 @@ export default function Home() {
 
   //Edit an Expense
 
+
+
   return (
     <Cont>
+      <SetBudget/>
       <Column>
         <MyCalender date={date} setDate={setDate} />
       </Column>
@@ -129,6 +133,8 @@ export default function Home() {
               filteredExpenses={filteredExpenses}/>
         <AddButton handleClick={showItemMenu} />
       </Column>
+
+      
 
       {showAddItem ? (
         <PopUp
@@ -144,6 +150,7 @@ export default function Home() {
       ) : (
         <></>
       )}
+     
     </Cont>
   );
 }
