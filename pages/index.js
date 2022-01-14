@@ -3,25 +3,13 @@ import styled from "styled-components";
 import MyCalender from "../comps/Calender";
 import "react-calendar/dist/Calendar.css";
 import DisplayExpense from "../comps/DisplayExpense";
-<<<<<<< HEAD
-
-import Card from '../comps/Card';
-
-const Cont = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  flex-direction: column;
-`;
-=======
 import PopUp from "../comps/popup";
 import Itemheadings from "../comps/ItemChartHeadings";
 import Itemlist from "../comps/itemChartItems";
 import AddButton from "../comps/Button";
 import DisplayTotal from "../comps/DisplayTotal";
 import ItemChart from "../comps/ItemChart";
->>>>>>> 9f058ff2c7a9ac65de26a1ce8015c608ceef2da5
+import SetBudget from '../comps/SetBudjet';
 
 export default function Home() {
 
@@ -128,13 +116,11 @@ export default function Home() {
 
   //Edit an Expense
 
+
+
   return (
     <Cont>
-<<<<<<< HEAD
-      <MyCalender date={date} setDate={setDate} />
-      <DisplayExpense expenses={expenses} date={date} />
-      <Card/>
-=======
+      <SetBudget/>
       <Column>
         <MyCalender date={date} setDate={setDate} />
       </Column>
@@ -147,6 +133,8 @@ export default function Home() {
               filteredExpenses={filteredExpenses}/>
         <AddButton handleClick={showItemMenu} />
       </Column>
+
+      
 
       {showAddItem ? (
         <PopUp
@@ -162,7 +150,7 @@ export default function Home() {
       ) : (
         <></>
       )}
->>>>>>> 9f058ff2c7a9ac65de26a1ce8015c608ceef2da5
+     
     </Cont>
   );
 }
