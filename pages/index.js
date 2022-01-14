@@ -105,6 +105,78 @@ export default function Home() {
 
   //Filter expenses by amount
 
+  //Sort by date
+  const expenseDates = [];
+
+  const getDates = async () => {
+    try{
+      const o = expenses;
+
+      
+
+      for(var i = 0; i < expenses.length; i++){
+        expenseDates.push(o[i].date);
+      }
+
+      console.log("EXPENSE DATES ARRAY: " + expenseDates);
+
+      return expenseDates;
+
+    } catch(e){
+      console.log("ERROR IN GETDATES: " + e)
+    }
+  }
+
+  getDates();
+
+  const sortDatesDesc = () => {
+    function compareDates(a, b){
+      if(a < b){
+        return -1;
+      }
+      if(a > b){
+        return 1;
+      }
+
+      return 0;
+    }
+
+    expenseDates.sort(compareDates);
+
+    console.log("ASCENDING EXPENSE DATES: " + expenseDates);
+  }
+
+  sortDatesDesc();
+
+  const sortDatesAsc = () => {
+    function compareDates(a, b){
+      if(a < b){
+        return 1;
+      }
+      if(a > b){
+        return -1;
+      }
+
+      return 0;
+    }
+
+    expenseDates.sort(compareDates);
+
+    console.log("DESCENDING EXPENSE DATES: " + expenseDates);
+  }
+
+  sortDatesAsc();
+
+  //Sort by name
+  const sortName = () => {
+    
+  }
+
+  //Sort by amount
+  const sortAmount = () => {
+
+  }
+
   //Add Total expenses from day
 
   //Set Daily Budget
