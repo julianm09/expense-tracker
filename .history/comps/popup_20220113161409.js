@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import AddButton from "./Button";
-import Dropdown from "./dropdown";
 
 const Overlay = styled.div`
   display: flex;
@@ -136,7 +135,7 @@ export default function PopUp({
           </TextCont>
           <TextCont>
             <Title>Type</Title>
-            <Dropdown
+            <Box
               onChange={(e) => setExpenseType(e.target.value)}
               value={expenseType}
             />

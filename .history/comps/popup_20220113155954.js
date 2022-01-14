@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import AddButton from "./Button";
-import Dropdown from "./dropdown";
+import { Dropdown } from "semantic-ui-react";
 
 const Overlay = styled.div`
   display: flex;
@@ -137,6 +137,9 @@ export default function PopUp({
           <TextCont>
             <Title>Type</Title>
             <Dropdown
+              clearable
+              options={options}
+              selection
               onChange={(e) => setExpenseType(e.target.value)}
               value={expenseType}
             />
