@@ -129,7 +129,7 @@ export default function Home() {
 
   getDates();
 
-  const sortDates = () => {
+  const sortDatesDesc = () => {
     function compareDates(a, b){
       if(a < b){
         return -1;
@@ -143,10 +143,29 @@ export default function Home() {
 
     expenseDates.sort(compareDates);
 
-    console.log("SORTED EXPENSE DATES: " + expenseDates);
+    console.log("ASCENDING EXPENSE DATES: " + expenseDates);
   }
 
-  sortDates();
+  sortDatesDesc();
+
+  const sortDatesAsc = () => {
+    function compareDates(a, b){
+      if(a < b){
+        return 1;
+      }
+      if(a > b){
+        return -1;
+      }
+
+      return 0;
+    }
+
+    expenseDates.sort(compareDates);
+
+    console.log("DESCENDING EXPENSE DATES: " + expenseDates);
+  }
+
+  sortDatesAsc();
 
   //Sort by name
   const sortName = () => {
