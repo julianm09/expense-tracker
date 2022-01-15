@@ -112,9 +112,7 @@ export default function Home() {
     try{
       const o = expenses;
 
-      
-
-      for(var i = 0; i < expenses.length; i++){
+      for(let i = 0; i < expenses.length; i++){
         expenseDates.push(o[i].date);
       }
 
@@ -168,9 +166,48 @@ export default function Home() {
   sortDatesAsc();
 
   //Sort by name
-  const sortName = () => {
-    
+  const expenseNames = [];
+
+  const getNames = () => {
+    for(let i = 0; i < expenses.length; i++){
+      var e = expenses[i];
+      for(let k = 0; k < expenses.length; k++){
+        expenseNames.push(e.expenses[k].name);
+      }
+    }
+
+    console.log("EXPENSE NAMES ARRAY: " + expenseNames);
+
+    return expenseNames;
+
   }
+
+  getNames();
+
+  const sortNameAsc = () => {
+    expenseNames.sort();
+
+    console.log("SORT ASCENDING NAMES: " + expenseNames);
+  }
+
+  sortNameAsc();
+
+  const sortNameDesc = () => {
+    expenseNames.sort((a, b) => {
+      if(a > b){
+        return -1;
+      }
+      if(a < b){
+        return 1;
+      }
+
+      return 0;
+    })
+
+    console.log("SORT DESCENDING NAMES: " + expenseNames);
+  }
+
+  sortNameDesc();
 
   //Sort by amount
   const sortAmount = () => {
