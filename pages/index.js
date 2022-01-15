@@ -116,7 +116,7 @@ export default function Home() {
         expenseDates.push(o[i].date);
       }
 
-      console.log("EXPENSE DATES ARRAY: " + expenseDates);
+      // console.log("EXPENSE DATES ARRAY: " + expenseDates);
 
       return expenseDates;
 
@@ -141,7 +141,7 @@ export default function Home() {
 
     expenseDates.sort(compareDates);
 
-    console.log("ASCENDING EXPENSE DATES: " + expenseDates);
+    // console.log("ASCENDING EXPENSE DATES: " + expenseDates);
   }
 
   sortDatesDesc();
@@ -160,7 +160,7 @@ export default function Home() {
 
     expenseDates.sort(compareDates);
 
-    console.log("DESCENDING EXPENSE DATES: " + expenseDates);
+    // console.log("DESCENDING EXPENSE DATES: " + expenseDates);
   }
 
   sortDatesAsc();
@@ -176,7 +176,7 @@ export default function Home() {
       }
     }
 
-    console.log("EXPENSE NAMES ARRAY: " + expenseNames);
+    // console.log("EXPENSE NAMES ARRAY: " + expenseNames);
 
     return expenseNames;
 
@@ -187,7 +187,7 @@ export default function Home() {
   const sortNameAsc = () => {
     expenseNames.sort();
 
-    console.log("SORT ASCENDING NAMES: " + expenseNames);
+    // console.log("SORT ASCENDING NAMES: " + expenseNames);
   }
 
   sortNameAsc();
@@ -204,15 +204,46 @@ export default function Home() {
       return 0;
     })
 
-    console.log("SORT DESCENDING NAMES: " + expenseNames);
+    // console.log("SORT DESCENDING NAMES: " + expenseNames);
   }
 
   sortNameDesc();
 
   //Sort by amount
-  const sortAmount = () => {
+  const expenseAmounts = [];
 
+  const getExpenseAmounts = () => {
+    for(let i = 0; i < expenses.length; i++){
+      var e = expenses[i];
+      for(let k = 0; k < expenses.length; k++){
+        expenseAmounts.push(e.expenses[k].price);
+      }
+    }
+
+    // console.log("EXPENSE AMOUNTS: " + expenseAmounts);
   }
+
+  getExpenseAmounts();
+
+  const sortAmountAsc = () => {
+    expenseAmounts.sort((a, b) => {
+      return a - b;
+    })
+
+    // console.log("ASCENDING EXPENSES: " + expenseAmounts);
+  }
+
+  sortAmountAsc();
+
+  const sortAmountDesc = () => {
+    expenseAmounts.sort((a, b) => {
+      return b - a;
+    })
+
+    // console.log("DESCENDING EXPENSES: " + expenseAmounts);
+  }
+
+  sortAmountDesc();
 
   //Add Total expenses from day
 
