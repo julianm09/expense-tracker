@@ -5,7 +5,7 @@ import { AiFillDelete, AiOutlineEdit } from "react-icons/ai";
 const Cont = styled.div`
   display: flex;
   width: 100%;
-  height: 75px;
+  height: 50px;
   justify-content: space-between;
   border-bottom: 0.5px solid #737373;
   align-items: center;

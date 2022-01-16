@@ -17,7 +17,7 @@ const Message = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-  height: 150px;
+  height: 200px;
 `;
 
 export default function DisplayExpense({
@@ -25,24 +25,27 @@ export default function DisplayExpense({
   date,
   filteredExpenses,
   deleteExpense,
-  editExpense
+  editExpense,
+  filter,
 }) {
   return (
     <Cont>
       {filteredExpenses.length > 0 ? (
-        filteredExpenses.map((expense) => (
-          <Itemlist
-            key={expense.id}
-            Itemname={expense.name}
-            Itemtype={expense.type}
-            Itemamount={expense.price}
-            expenses={expenses}
-            deleteExpense={deleteExpense}
-            id={expense.id}
-            expense={expense}
-            editExpense={editExpense}
-          />
-        ))
+        filteredExpenses
+          .filter((x) => (filter === "All" ? x : x.type === filter))
+          .map((expense) => (
+            <Itemlist
+              key={expense.id}
+              Itemname={expense.name}
+              Itemtype={expense.type}
+              Itemamount={expense.price}
+              expenses={expenses}
+              deleteExpense={deleteExpense}
+              id={expense.id}
+              expense={expense}
+              editExpense={editExpense}
+            />
+          ))
       ) : (
         <Message>Add an Expense</Message>
       )}

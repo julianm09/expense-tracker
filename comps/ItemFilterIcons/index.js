@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { GiForkKnifeSpoon } from "react-icons/gi";
-import { MdAirportShuttle, MdHardware } from "react-icons/md";
+import { MdAirportShuttle, MdHardware, MdAllInclusive } from "react-icons/md";
 // import { AiFillThunderBolt } from "react-icons/ai";
 
 const Cont = styled.div`
@@ -14,9 +14,8 @@ const Cont = styled.div`
 
 const FilterContainer = styled.div`
   display: flex;
-  width: 40%;
+  width: 100%;
   height: 100%;
-  justify-content: space-between;
   align-items: center;
   font-size: 1.2rem;
 `;
@@ -37,66 +36,81 @@ const SortList = styled.ul`
   justify-content: space-between;
 `;
 
+const Filter = styled.div`
+  width: 40px;
+  height: 40px;
+  margin: 0 0 0 25px ;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 20px;
+  color: ${(props) => props.color};
+  border: ${(props) => props.border};
+`;
 
 export default function ItemFilterIcons({
   onClickName,
   onClickAmount,
+  setFilter,
+  filter,
 }) {
-
-    // const [showFood, setShowFood] = useState(false);
-    // const [showTravel, setShowTravel] = useState(false);
-    // const [showUtils, setShowUtils] = useState(false);
-
-    // const setFood = () => showFood(true);
-    // const setTravel = () => showTravel(true);
-    // const setUtils = () => showUtils(true);
-
-    // const [filter, setFilter] = useState('all')
-    
-    // filtering trial
-
-    const [isBlue, setIsBlue] = useState(false);
-    const [isGreen, setIsGreen] = useState(false);
-    const [isRed, setIsRed] = useState(false);
-
-    //color change
-
   return (
     <Cont>
       <FilterContainer>
         Filter By:
-        {/* <GiForkKnifeSpoon onClick={()=>{setFood}}/>
-        <MdAirportShuttle onClick={()=>{setTravel}}/>
-        <MdHardware onClick={()=>{setUtils}}/>       */}
-
-        {/* <GiForkKnifeSpoon onClick={()=>{setFilter('food')}}/>
-        <MdAirportShuttle onClick={()=>{setFilter('travel')}}/>
-        <MdHardware onClick={()=>{setFilter('utils')}}/>     */}
-        
-
-        <GiForkKnifeSpoon 
-        onClick={() => setIsBlue(!isBlue)}
-        size='1.8rem'
-        color={isBlue ? 'blue' : 'black'}
-        />
-        <MdAirportShuttle 
-        onClick={() => setIsGreen(!isGreen)}
-        size='1.8rem'
-        color={isGreen ? 'green' : 'black'}
-        />
-        <MdHardware onClick={() => setIsRed(!isRed)}
-        size='1.8rem'
-        color={isRed? 'red' : 'black'}
-        />   
+        <Filter
+        style={{fontSize: '14px'}}
+          color={filter === "All" ? "#006EDC" : "#6d6d6d"}
+          border={
+            filter === "All" ? "0.5px solid #006EDC" : "0.5px solid #6d6d6d"
+          }
+          onClick={() => setFilter("All")}
+        >
+          All
+        </Filter>
+        <Filter
+          onClick={() => setFilter("Food")}
+          color={filter === "Food" ? "#006EDC" : "#6d6d6d"}
+          border={
+            filter === "Food" ? "0.5px solid #006EDC" : "0.5px solid #6d6d6d"
+          }
+          filter={filter}
+        >
+          <GiForkKnifeSpoon />
+        </Filter>
+        <Filter
+          onClick={() => setFilter("Travel")}
+          color={filter === "Travel" ? "#006EDC" : "#6d6d6d"}
+          border={
+            filter === "Travel" ? "0.5px solid #006EDC" : "0.5px solid #6d6d6d"
+          }
+          filter={filter}
+        >
+          <MdAirportShuttle />
+        </Filter>
+        <Filter
+          onClick={() => setFilter("Utilities")}
+          color={filter === "Utilities" ? "#006EDC" : "#6d6d6d"}
+          border={
+            filter === "Utilities"
+              ? "0.5px solid #006EDC"
+              : "0.5px solid #6d6d6d"
+          }
+          filter={filter}
+        >
+          <MdHardware />
+        </Filter>
       </FilterContainer>
- 
-      <SortContainer>
+
+{/*       <SortContainer>
         Sort By:
         <SortList>
           <li onClick={onClickName}>Name</li>
           <li onClick={onClickAmount}>Amount</li>
         </SortList>
-      </SortContainer>
+      </SortContainer> */}
     </Cont>
   );
 }

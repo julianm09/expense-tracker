@@ -9,9 +9,8 @@ import Itemlist from "../comps/itemChartItems";
 import AddButton from "../comps/Button";
 import DisplayTotal from "../comps/DisplayTotal";
 import ItemChart from "../comps/ItemChart";
-import SetBudget from '../comps/SetBudjet';
+import SetBudget from "../comps/SetBudjet";
 import ItemFilterIcons from "../comps/ItemFilterIcons";
-
 
 export default function Home() {
   //selected date
@@ -37,9 +36,9 @@ export default function Home() {
     {
       date: "2022-01-13",
       expenses: [
-
-        { id: 3453, name: "save on foods", price: 101.22, type: "groceries" },
-        { id: 7567, name: "shell", price: 55.21, type: "gasoline" },
+        { id: 3453, name: "save on foods", price: 101.22, type: "Food" },
+        { id: 7567, name: "shell", price: 55.21, type: "Travel" },
+        { id: 3234, name: "asd", price: 55.21, type: "Utilities" },
       ],
     },
   ]);
@@ -99,6 +98,7 @@ export default function Home() {
   };
 
   //Filter expenses by date
+  const [filter, setFilter] = useState("All");
 
   //Filter expenses by name
 
@@ -126,7 +126,6 @@ export default function Home() {
 
   getDates();
 
-
   //not sure how this could be used, since we have a calender that filters expense dates already for the user
 
   const sortDatesDesc = () => {
@@ -143,10 +142,8 @@ export default function Home() {
 
     expenseDates.sort(compareDates);
 
-
     // console.log("ASCENDING EXPENSE DATES: " + expenseDates);
-  }
-
+  };
 
   const sortDatesAsc = () => {
     function compareDates(a, b) {
@@ -162,77 +159,74 @@ export default function Home() {
 
     expenseDates.sort(compareDates);
 
-
     // console.log("DESCENDING EXPENSE DATES: " + expenseDates);
-  }
-
-
+  };
 
   const sortNameAsc = () => {
     filteredExpenses.sort((a, b) => {
-      if(a.name < b.name){
+      if (a.name < b.name) {
         return -1;
       }
-      if(a.name > b.name){
+      if (a.name > b.name) {
         return 1;
       }
 
       return 0;
     });
-  }
+  };
 
   const sortNameDesc = () => {
     filteredExpenses.sort((a, b) => {
-      if(a.name < b.name){
+      if (a.name < b.name) {
         return 1;
       }
-      if(a.name > b.name){
+      if (a.name > b.name) {
         return -1;
       }
 
       return 0;
-    })
-  }
+    });
+  };
 
   var nameSortClick = 0;
 
   const handleNameSort = () => {
     nameSortClick += 1;
 
-    if(nameSortClick % 2 == 1){
+    if (nameSortClick % 2 == 1) {
       sortNameAsc();
-    } else if(nameSortClick % 2 == 0){
+    } else if (nameSortClick % 2 == 0) {
       sortNameDesc();
     }
-  }
+  };
 
   //Sort by amount
   const sortAmountAsc = () => {
     filteredExpenses.sort((a, b) => {
       return a.price - b.price;
-    })
-  }
+    });
+  };
 
   const sortAmountDesc = () => {
     filteredExpenses.sort((a, b) => {
       return b.price - a.price;
-    })
-  }
+    });
+  };
 
   const amountSortClick = 0;
 
   const handleAmountSort = () => {
     amountSortClick += 1;
 
-    if(amountSortClick % 2 == 1){
+    if (amountSortClick % 2 == 1) {
       sortAmountAsc();
-    } else if(amountSortClick % 2 == 0){
+    } else if (amountSortClick % 2 == 0) {
       sortAmountDesc();
     }
-  }
+  };
 
   //Add Total expenses from day
-  console.log(filteredExpenses.map(x => x.price))
+  console.log(filteredExpenses.map((x) => x.price));
 
   //Set Daily Budget
 
@@ -294,16 +288,17 @@ export default function Home() {
   return (
     <Cont>
       <Column>
+        <DisplayTotal />
         <SetBudget />
         <MyCalender date={date} setDate={setDate} />
       </Column>
 
       <Column>
-
-      <DisplayTotal/>
         <ItemFilterIcons
           onClickName={handleNameSort}
           onClickAmount={handleAmountSort}
+          filter={filter}
+          setFilter={setFilter}
         />
 
         <Itemheadings />
@@ -313,6 +308,7 @@ export default function Home() {
           filteredExpenses={filteredExpenses}
           deleteExpense={deleteExpense}
           editExpense={editExpense}
+          filter={filter}
         />
         <AddButton handleClick={showItemMenu} />
       </Column>
