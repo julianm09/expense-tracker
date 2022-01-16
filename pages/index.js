@@ -10,6 +10,7 @@ import AddButton from "../comps/Button";
 import DisplayTotal from "../comps/DisplayTotal";
 import ItemChart from "../comps/ItemChart";
 import SetBudget from '../comps/SetBudjet';
+import ItemFilterIcons from "../comps/ItemFilterIcons";
 
 export default function Home() {
 
@@ -36,8 +37,8 @@ export default function Home() {
     {
       date: "2022-01-13",
       expenses: [
-        { name: "save on foods", price: 101.22, type: "groceries" },
-        { name: "shell", price: 55.21, type: "gasoline" },
+        { name: "walmart", price: 80.39, type: "groceries" },
+        { name: "chevron", price: 30.00, type: "gasoline" },
       ],
     },
   ]);
@@ -54,7 +55,6 @@ export default function Home() {
   useEffect(() => {
     filterDate();
   }, [expenses]);
-
 
   //filter expenses by date
   const filterDate = () => {
@@ -106,29 +106,7 @@ export default function Home() {
   //Filter expenses by amount
 
   //Sort by date
-  const expenseDates = [];
-
-  const getDates = async () => {
-    try{
-      const o = expenses;
-
-      
-
-      for(var i = 0; i < expenses.length; i++){
-        expenseDates.push(o[i].date);
-      }
-
-      console.log("EXPENSE DATES ARRAY: " + expenseDates);
-
-      return expenseDates;
-
-    } catch(e){
-      console.log("ERROR IN GETDATES: " + e)
-    }
-  }
-
-  getDates();
-
+  //not sure how this could be used, since we have a calender that filters expense dates already for the user
   const sortDatesDesc = () => {
     function compareDates(a, b){
       if(a < b){
@@ -143,10 +121,8 @@ export default function Home() {
 
     expenseDates.sort(compareDates);
 
-    console.log("ASCENDING EXPENSE DATES: " + expenseDates);
+    // console.log("ASCENDING EXPENSE DATES: " + expenseDates);
   }
-
-  sortDatesDesc();
 
   const sortDatesAsc = () => {
     function compareDates(a, b){
@@ -162,19 +138,71 @@ export default function Home() {
 
     expenseDates.sort(compareDates);
 
-    console.log("DESCENDING EXPENSE DATES: " + expenseDates);
+    // console.log("DESCENDING EXPENSE DATES: " + expenseDates);
   }
 
-  sortDatesAsc();
-
   //Sort by name
-  const sortName = () => {
-    
+  const sortNameAsc = () => {
+    filteredExpenses.sort((a, b) => {
+      if(a.name < b.name){
+        return -1;
+      }
+      if(a.name > b.name){
+        return 1;
+      }
+
+      return 0;
+    });
+  }
+
+  const sortNameDesc = () => {
+    filteredExpenses.sort((a, b) => {
+      if(a.name < b.name){
+        return 1;
+      }
+      if(a.name > b.name){
+        return -1;
+      }
+
+      return 0;
+    })
+  }
+
+  var nameSortClick = 0;
+
+  const handleNameSort = () => {
+    nameSortClick += 1;
+
+    if(nameSortClick % 2 == 1){
+      sortNameAsc();
+    } else if(nameSortClick % 2 == 0){
+      sortNameDesc();
+    }
   }
 
   //Sort by amount
-  const sortAmount = () => {
+  const sortAmountAsc = () => {
+    filteredExpenses.sort((a, b) => {
+      return a.price - b.price;
+    })
+  }
 
+  const sortAmountDesc = () => {
+    filteredExpenses.sort((a, b) => {
+      return b.price - a.price;
+    })
+  }
+
+  const amountSortClick = 0;
+
+  const handleAmountSort = () => {
+    amountSortClick += 1;
+
+    if(amountSortClick % 2 == 1){
+      sortAmountAsc();
+    } else if(amountSortClick % 2 == 0){
+      sortAmountDesc();
+    }
   }
 
   //Add Total expenses from day
@@ -210,6 +238,10 @@ export default function Home() {
 
       <Column>
       <DisplayTotal/>
+        <ItemFilterIcons
+          onClickName={handleNameSort}
+          onClickAmount={handleAmountSort}
+        />
         <Itemheadings />
         <ItemChart expenses={expenses}
               date={date}
