@@ -9,17 +9,16 @@ import Itemlist from "../comps/itemChartItems";
 import AddButton from "../comps/Button";
 import DisplayTotal from "../comps/DisplayTotal";
 import ItemChart from "../comps/ItemChart";
-import SetBudget from '../comps/SetBudjet';
+import SetBudget from "../comps/SetBudjet";
 
 export default function Home() {
-
   //selected date
   const [date, setDate] = useState("");
 
   //form inputs
   const [expenseName, setExpenseName] = useState("");
-  const [expensePrice, setExpensePrice] = useState(null);
-  const [expenseType, setExpenseType] = useState("");
+  const [expensePrice, setExpensePrice] = useState(0);
+  const [expenseType, setExpenseType] = useState("Food");
 
   //hook to show and hide popup
   const [showAddItem, setShowAddItem] = useState(false);
@@ -29,15 +28,15 @@ export default function Home() {
     {
       date: "2022-01-12",
       expenses: [
-        { name: "save on foods", price: 101.22, type: "groceries" },
-        { name: "shell", price: 55.21, type: "gasoline" },
+        { id: 4343, name: "save on foods", price: 101.22, type: "groceries" },
+        { id: 435, name: "shell", price: 55.21, type: "gasoline" },
       ],
     },
     {
       date: "2022-01-13",
       expenses: [
-        { name: "save on foods", price: 101.22, type: "groceries" },
-        { name: "shell", price: 55.21, type: "gasoline" },
+        { id: 3453, name: "save on foods", price: 101.22, type: "groceries" },
+        { id: 7567, name: "shell", price: 55.21, type: "gasoline" },
       ],
     },
   ]);
@@ -55,7 +54,6 @@ export default function Home() {
     filterDate();
   }, [expenses]);
 
-
   //filter expenses by date
   const filterDate = () => {
     const filteredDate = expenses.filter((expense) => expense.date === date);
@@ -67,31 +65,29 @@ export default function Home() {
     }
   };
 
+  function randomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
   //add an expense
   const addExpense = () => {
-    if (filteredExpenses.length > 0) {
-      setExpenses([
-        ...expenses.filter((expense) => expense.date != date),
-        {
-          date: date,
-          expenses: [
-            ...filteredExpenses,
-            { name: expenseName, price: expensePrice, type: expenseType },
-          ],
-        },
-      ]);
-    } else {
-      setExpenses([
-        ...expenses,
-        {
-          date: date,
-          expenses: [
-            ...filteredExpenses,
-            { name: expenseName, price: expensePrice, type: expenseType },
-          ],
-        },
-      ]);
-    }
+    setExpenses([
+      ...expenses.filter((expense) => expense.date != date),
+      {
+        date: date,
+        expenses: [
+          ...filteredExpenses,
+          {
+            id: randomInteger(0, 99999),
+            name: expenseName,
+            price: expensePrice,
+            type: expenseType,
+          },
+        ],
+      },
+    ]);
+
+    setShowAddItem(false);
   };
 
   // show popup form
@@ -109,32 +105,29 @@ export default function Home() {
   const expenseDates = [];
 
   const getDates = async () => {
-    try{
+    try {
       const o = expenses;
 
-      
-
-      for(var i = 0; i < expenses.length; i++){
+      for (var i = 0; i < expenses.length; i++) {
         expenseDates.push(o[i].date);
       }
 
-      console.log("EXPENSE DATES ARRAY: " + expenseDates);
+      /*       console.log("EXPENSE DATES ARRAY: " + expenseDates); */
 
       return expenseDates;
-
-    } catch(e){
-      console.log("ERROR IN GETDATES: " + e)
+    } catch (e) {
+      console.log("ERROR IN GETDATES: " + e);
     }
-  }
+  };
 
   getDates();
 
   const sortDatesDesc = () => {
-    function compareDates(a, b){
-      if(a < b){
+    function compareDates(a, b) {
+      if (a < b) {
         return -1;
       }
-      if(a > b){
+      if (a > b) {
         return 1;
       }
 
@@ -143,17 +136,17 @@ export default function Home() {
 
     expenseDates.sort(compareDates);
 
-    console.log("ASCENDING EXPENSE DATES: " + expenseDates);
-  }
+    /*     console.log("ASCENDING EXPENSE DATES: " + expenseDates); */
+  };
 
   sortDatesDesc();
 
   const sortDatesAsc = () => {
-    function compareDates(a, b){
-      if(a < b){
+    function compareDates(a, b) {
+      if (a < b) {
         return 1;
       }
-      if(a > b){
+      if (a > b) {
         return -1;
       }
 
@@ -162,22 +155,19 @@ export default function Home() {
 
     expenseDates.sort(compareDates);
 
-    console.log("DESCENDING EXPENSE DATES: " + expenseDates);
-  }
+    /*     console.log("DESCENDING EXPENSE DATES: " + expenseDates); */
+  };
 
   sortDatesAsc();
 
   //Sort by name
-  const sortName = () => {
-    
-  }
+  const sortName = () => {};
 
   //Sort by amount
-  const sortAmount = () => {
-
-  }
+  const sortAmount = () => {};
 
   //Add Total expenses from day
+  console.log(filteredExpenses.map(x => x.price))
 
   //Set Daily Budget
 
@@ -185,41 +175,76 @@ export default function Home() {
 
   //Delete an Expense
   const deleteExpense = (i) => {
-    console.log(filteredExpenses.filter(expense => expense.name != i))
+    setExpenses([
+      ...expenses.filter((expense) => expense.date != date),
+      {
+        date: date,
+        expenses: [...filteredExpenses.filter((expense) => expense.id != i)],
+      },
+    ]);
+  };
+
+  const [editingExpense, setEditingExpense] = useState(false);
+  const [editId, setEditId] = useState(null);
+
+  //Edit an Expense
+
+  const editExpense = (i) => {
+    //open popup with inputs filled
+    setExpenseName(i.name);
+    setExpenseType(i.type);
+    setExpensePrice(i.price);
+    setShowAddItem(true);
+    setEditId(i.id);
+    setEditingExpense(true);
+  };
+
+  const addEditExpense = () => {
+    //setExpenses to filtered expenses + update
     setExpenses([
       ...expenses.filter((expense) => expense.date != date),
       {
         date: date,
         expenses: [
-          ...filteredExpenses.filter(expense => expense.name != i)
+          ...filteredExpenses.filter((expense) => expense.id != editId),
+          {
+            id: randomInteger(0, 99999),
+            name: expenseName,
+            price: expensePrice,
+            type: expenseType,
+          },
         ],
       },
     ]);
-  }
 
-  //Edit an Expense
-
-
+    // close popup and reset fields
+    setExpenseName("");
+    setExpenseType("Food");
+    setExpensePrice(0);
+    setShowAddItem(false);
+    setEditId(null);
+    setEditingExpense(false);
+  };
 
   return (
     <Cont>
-      <SetBudget/>
       <Column>
+        <SetBudget />
         <MyCalender date={date} setDate={setDate} />
       </Column>
 
       <Column>
-      <DisplayTotal/>
+        <DisplayTotal />
         <Itemheadings />
-        <ItemChart expenses={expenses}
-              date={date}
-              filteredExpenses={filteredExpenses}
-              deleteExpense={deleteExpense}
-              />
+        <ItemChart
+          expenses={expenses}
+          date={date}
+          filteredExpenses={filteredExpenses}
+          deleteExpense={deleteExpense}
+          editExpense={editExpense}
+        />
         <AddButton handleClick={showItemMenu} />
       </Column>
-
-      
 
       {showAddItem ? (
         <PopUp
@@ -231,11 +256,12 @@ export default function Home() {
           expenseType={expenseType}
           setShowAddItem={setShowAddItem}
           addExpense={addExpense}
+          editingExpense={editingExpense}
+          addEditExpense={addEditExpense}
         />
       ) : (
         <></>
       )}
-     
     </Cont>
   );
 }

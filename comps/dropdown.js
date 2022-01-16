@@ -7,15 +7,24 @@ const DropDownBox = styled.select`
   border: 0.5px solid #000;
   border-radius: 10px;
   padding: 0 15px;
+
+  select{
+      -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  }
 `;
-export default function Dropdown() {
+export default function Dropdown({ expenseType, setExpenseType }) {
   return (
-    <form action="/action_page.php">
-      <DropDownBox id="cars" name="Categories">
-        <option value="Food">Food</option>
-        <option value="Travel">Travel</option>
-        <option value="Utilities">Utilities</option>
-      </DropDownBox>
-    </form>
+    <DropDownBox
+      id="cars"
+      name="Categories"
+      onChange={(e) => setExpenseType(e.target.value)}
+      value={expenseType}
+    >
+      <option value="Food">Food</option>
+      <option value="Travel">Travel</option>
+      <option value="Utilities">Utilities</option>
+    </DropDownBox>
   );
 }

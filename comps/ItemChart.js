@@ -15,13 +15,14 @@ const Cont = styled.div`
   margin: 0 0 50px 0;
 `;
 
-export default function ItemChart({ expenses, date, filteredExpenses, deleteExpense}) {
+export default function ItemChart({ expenses, date, filteredExpenses, deleteExpense, editExpense}) {
   return <Cont>
     <DisplayExpense
               expenses={expenses}
               date={date}
               filteredExpenses={filteredExpenses}
               deleteExpense={deleteExpense}
+              editExpense={editExpense}
               />
     </Cont>;
 }
