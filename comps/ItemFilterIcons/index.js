@@ -58,13 +58,16 @@ export default function ItemFilterIcons() {
 
       <GiForkKnifeSpoon 
       onClick={() => setIsBlue(!isBlue)}
+      size='1.8rem'
       color={isBlue ? 'blue' : 'black'}
       />
       <MdAirportShuttle 
       onClick={() => setIsGreen(!isGreen)}
+      size='1.8rem'
       color={isGreen ? 'green' : 'black'}
       />
       <MdHardware onClick={() => setIsRed(!isRed)}
+      size='1.8rem'
       color={isRed? 'red' : 'black'}
       />    
 
