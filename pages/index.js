@@ -9,7 +9,9 @@ import Itemlist from "../comps/itemChartItems";
 import AddButton from "../comps/Button";
 import DisplayTotal from "../comps/DisplayTotal";
 import ItemChart from "../comps/ItemChart";
-import SetBudget from "../comps/SetBudjet";
+import SetBudget from '../comps/SetBudjet';
+import ItemFilterIcons from "../comps/ItemFilterIcons";
+
 
 export default function Home() {
   //selected date
@@ -35,6 +37,7 @@ export default function Home() {
     {
       date: "2022-01-13",
       expenses: [
+
         { id: 3453, name: "save on foods", price: 101.22, type: "groceries" },
         { id: 7567, name: "shell", price: 55.21, type: "gasoline" },
       ],
@@ -102,6 +105,7 @@ export default function Home() {
   //Filter expenses by amount
 
   //Sort by date
+
   const expenseDates = [];
 
   const getDates = async () => {
@@ -122,6 +126,9 @@ export default function Home() {
 
   getDates();
 
+
+  //not sure how this could be used, since we have a calender that filters expense dates already for the user
+
   const sortDatesDesc = () => {
     function compareDates(a, b) {
       if (a < b) {
@@ -136,10 +143,10 @@ export default function Home() {
 
     expenseDates.sort(compareDates);
 
-    /*     console.log("ASCENDING EXPENSE DATES: " + expenseDates); */
-  };
 
-  sortDatesDesc();
+    // console.log("ASCENDING EXPENSE DATES: " + expenseDates);
+  }
+
 
   const sortDatesAsc = () => {
     function compareDates(a, b) {
@@ -155,16 +162,74 @@ export default function Home() {
 
     expenseDates.sort(compareDates);
 
-    /*     console.log("DESCENDING EXPENSE DATES: " + expenseDates); */
-  };
 
-  sortDatesAsc();
+    // console.log("DESCENDING EXPENSE DATES: " + expenseDates);
+  }
 
-  //Sort by name
-  const sortName = () => {};
+
+
+  const sortNameAsc = () => {
+    filteredExpenses.sort((a, b) => {
+      if(a.name < b.name){
+        return -1;
+      }
+      if(a.name > b.name){
+        return 1;
+      }
+
+      return 0;
+    });
+  }
+
+  const sortNameDesc = () => {
+    filteredExpenses.sort((a, b) => {
+      if(a.name < b.name){
+        return 1;
+      }
+      if(a.name > b.name){
+        return -1;
+      }
+
+      return 0;
+    })
+  }
+
+  var nameSortClick = 0;
+
+  const handleNameSort = () => {
+    nameSortClick += 1;
+
+    if(nameSortClick % 2 == 1){
+      sortNameAsc();
+    } else if(nameSortClick % 2 == 0){
+      sortNameDesc();
+    }
+  }
 
   //Sort by amount
-  const sortAmount = () => {};
+  const sortAmountAsc = () => {
+    filteredExpenses.sort((a, b) => {
+      return a.price - b.price;
+    })
+  }
+
+  const sortAmountDesc = () => {
+    filteredExpenses.sort((a, b) => {
+      return b.price - a.price;
+    })
+  }
+
+  const amountSortClick = 0;
+
+  const handleAmountSort = () => {
+    amountSortClick += 1;
+
+    if(amountSortClick % 2 == 1){
+      sortAmountAsc();
+    } else if(amountSortClick % 2 == 0){
+      sortAmountDesc();
+    }
+  }
 
   //Add Total expenses from day
   console.log(filteredExpenses.map(x => x.price))
@@ -234,7 +299,13 @@ export default function Home() {
       </Column>
 
       <Column>
-        <DisplayTotal />
+
+      <DisplayTotal/>
+        <ItemFilterIcons
+          onClickName={handleNameSort}
+          onClickAmount={handleAmountSort}
+        />
+
         <Itemheadings />
         <ItemChart
           expenses={expenses}
