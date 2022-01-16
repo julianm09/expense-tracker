@@ -104,21 +104,76 @@ export default function Home() {
   //Filter expenses by name
 
   //Filter expenses by amount
-  console.log(filteredExpenses.map(x => x.price)) 
   
-  Array.prototype.sum = function() {return [].reduce.call(this, (a,i) => a+i, 0);}
 
- 
-  const [totalSum, setTotalSum] = useState(0);
- if(expensePrice){
-   for(let i = 0; i < expensePrice.length; i++){
-    totalSum += expensePrice[i]
-  }
- }
+ // Array.prototype.sum = function() {return [].reduce.call(this, (a,i) => a+i, 0);}
+
+ //setSumTotal ={}
 
 
   //Add Total expenses from day
 
+
+  /*const totalSum = {
+    expenses: [],
+
+    setExpenses(expenseName,expenseType, expensePrice) {
+        account.expenses.push({
+            expenseName: expenseName,
+            expensePrice: expensePrice,
+            expenseType: expenseType,
+        });
+    },
+
+    getTotalSumSummary() {
+
+        return totalSum.expenses.reduce((result, expense) => result + expense.expensePrice, 0)
+        
+    }
+}*/
+
+/*
+function DisplayExpense (){
+const {expenses, setExpenses} = useState [0]
+
+return{
+  Total Expense:{''}
+  <span className="text-success">
+    ${' '}
+    {expenses.reduce((accumulator, currentValue) => {
+      return (accumulator += parseInt(currentValue.amount))
+    }, 0)}
+
+    <form/>
+    <List expenses ={expenses}/>
+}
+}
+*/
+
+
+ 
+ 
+ 
+
+ 
+
+  const sum = filteredExpenses.map(x => x.price)
+
+function add(array){
+  var total = 0;
+
+  for ( var i = 0; i < sum.length; i++){
+    total += array[i]
+    console.log(array[i])
+     console.log(total)
+  }
+  return total;
+ 
+}
+
+console.log(add(sum))
+
+ console.log(filteredExpenses.map(x => x.price)); 
   //Set Daily Budget
 
   //Calculate Budget and Total Expense Difference
@@ -137,7 +192,7 @@ export default function Home() {
       </Column>
 
       <Column>
-      <DisplayTotal expensePrice={totalSum}/>
+      <DisplayTotal totalSum={add(sum)}  />
         <Itemheadings />
         <ItemChart expenses={expenses}
               date={date}

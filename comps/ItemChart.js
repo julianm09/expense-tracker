@@ -17,9 +17,12 @@ const Cont = styled.div`
 
 export default function ItemChart({ expenses, date, filteredExpenses}) {
   return <Cont>
+     
+     
     <DisplayExpense
               expenses={expenses}
               date={date}
               filteredExpenses={filteredExpenses}/>
+              
     </Cont>;
 }

@@ -15,7 +15,7 @@ const Cont = styled.div`
 `;
 
 export default function DisplayTotal(
-{ expensePrice }
+{ totalSum }
 ){
-return <Cont>{expensePrice}</Cont>;
+return <Cont>{totalSum}</Cont>;
 }
