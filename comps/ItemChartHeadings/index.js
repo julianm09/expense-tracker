@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Cont = styled.div`
   display: flex;
   width: 80%;
-  height: 75px;
+  height: 50px;
   border-top: 0.5px solid #737373;
   border-bottom: 0.5px solid #737373;
   justify-content: space-between;
@@ -22,36 +22,31 @@ const Titlecont = styled.div`
 `;
 
 const Iconcont = styled.div`
-    width: 87px;
-    height: 71px;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    font-size: 34px;
-    color: #6D6D6D;
+  width: 87px;
 
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  font-size: 34px;
+  color: #6d6d6d;
 `;
 
-
 export default function Itemheadings() {
-
   return (
     <Cont>
-        <Titlecont>
-            <Title>Expense</Title>
-        </Titlecont>
+      <Titlecont>
+        <Title>Expense</Title>
+      </Titlecont>
 
-        <Titlecont>
-            <Title>Type</Title>
-        </Titlecont>
+      <Titlecont>
+        <Title>Type</Title>
+      </Titlecont>
 
-        <Titlecont>
-            <Title>Amount</Title>
-        </Titlecont>
+      <Titlecont>
+        <Title>Amount</Title>
+      </Titlecont>
 
-        <Iconcont>
-
-        </Iconcont>
+      <Iconcont></Iconcont>
     </Cont>
   );
 }
