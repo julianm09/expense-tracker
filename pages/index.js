@@ -104,6 +104,18 @@ export default function Home() {
   //Filter expenses by name
 
   //Filter expenses by amount
+  console.log(filteredExpenses.map(x => x.price)) 
+  
+  Array.prototype.sum = function() {return [].reduce.call(this, (a,i) => a+i, 0);}
+
+ 
+  const [totalSum, setTotalSum] = useState(0);
+ if(expensePrice){
+   for(let i = 0; i < expensePrice.length; i++){
+    totalSum += expensePrice[i]
+  }
+ }
+
 
   //Add Total expenses from day
 
@@ -115,6 +127,9 @@ export default function Home() {
 
   //Edit an Expense
 
+ 
+ 
+
   return (
     <Cont>
       <Column>
@@ -122,7 +137,7 @@ export default function Home() {
       </Column>
 
       <Column>
-      <DisplayTotal/>
+      <DisplayTotal expensePrice={totalSum}/>
         <Itemheadings />
         <ItemChart expenses={expenses}
               date={date}

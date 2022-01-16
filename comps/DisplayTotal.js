@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 
 const Cont = styled.div`
@@ -14,6 +14,8 @@ const Cont = styled.div`
   margin: 50px 0;
 `;
 
-export default function DisplayTotal({ total = "100" }) {
-  return <Cont>${100}</Cont>;
+export default function DisplayTotal(
+{ expensePrice }
+){
+return <Cont>{expensePrice}</Cont>;
 }
