@@ -56,11 +56,6 @@ export default function Home() {
     filterDate();
   }, [expenses]);
 
-  useEffect(() => {
-    filterDate();
-  }, [filteredExpenses]);
-
-
   //filter expenses by date
   const filterDate = () => {
     const filteredDate = expenses.filter((expense) => expense.date === date);
@@ -111,31 +106,7 @@ export default function Home() {
   //Filter expenses by amount
 
   //Sort by date
-  
-  // useEffect(() => {
-  //   getDates();
-  // }, [expenses]);
-
-  // const expenseDates = [];
-
-  // const getDates = () => {
-  //   if(expenses.date === date){
-  //     try{
-  //       const o = expenses;
-
-  //       for(let i = 0; i < expenses.length; i++){
-  //         expenseDates.push(o[i].date);
-  //       }
-
-  //       console.log("EXPENSE DATES ARRAY: " + expenseDates);
-
-  //       return expenseDates;
-  //     } catch(e){
-  //       console.log("ERROR IN getDates: " + e)
-  //     }
-  //   }
-  // }
-
+  //not sure how this could be used, since we have a calender that filters expense dates already for the user
   const sortDatesDesc = () => {
     function compareDates(a, b){
       if(a < b){
@@ -171,23 +142,6 @@ export default function Home() {
   }
 
   //Sort by name
-
-  // useEffect(() => {
-  //   getNames();
-  // }, [filteredExpenses]);
-
-  // const expenseNames = [];
-
-  // const getNames = () => {
-  //   for(let i = 0; i < filteredExpenses.length; i++){
-  //     expenseNames.push(filteredExpenses[i].name);
-  //   }
-
-  //   console.log("EXPENSE NAMES ARRAY: " + expenseNames);
-
-  //   return expenseNames;
-  // }
-
   const sortNameAsc = () => {
     filteredExpenses.sort((a, b) => {
       if(a.name < b.name){
@@ -227,30 +181,6 @@ export default function Home() {
   }
 
   //Sort by amount
-
-  // useEffect(() => {
-  //   getExpenseAmounts();
-  // }, [expenses]);
-
-  // const expenseAmounts = [];
-
-  // const getExpenseAmounts = () => {
-  //   try{
-  //     for(let i = 0; i < expenses.length; i++){
-  //       var e = expenses[i];
-  //       for(let k = 0; k < expenses.length; k++){
-  //         expenseAmounts.push(e.expenses[k].price);
-  //       }
-  //     }
-  //   } catch(e){
-  //     console.log("getExpenseAmounts Error: " + e);
-  //   }
-
-  //   // console.log("EXPENSE AMOUNTS: " + expenseAmounts);
-  // }
-
-  // getExpenseAmounts();
-
   const sortAmountAsc = () => {
     filteredExpenses.sort((a, b) => {
       return a.price - b.price;
