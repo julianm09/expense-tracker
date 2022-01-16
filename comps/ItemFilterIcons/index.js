@@ -37,10 +37,16 @@ const SortList = styled.ul`
   justify-content: space-between;
 `;
 
+const SortP = styled.p`
+  color: ${props=>props.clickColour};
+`;
+
 
 export default function ItemFilterIcons({
   onClickName,
   onClickAmount,
+  nameColour,
+  amountColour,
 }) {
 
     // const [showFood, setShowFood] = useState(false);
@@ -93,8 +99,24 @@ export default function ItemFilterIcons({
       <SortContainer>
         Sort By:
         <SortList>
-          <li onClick={onClickName}>Name</li>
-          <li onClick={onClickAmount}>Amount</li>
+          <li 
+          onClick={onClickName} 
+          >
+            <SortP
+            clickColour={nameColour} 
+            >
+              Name
+            </SortP>
+          </li>
+          <li 
+          onClick={onClickAmount} 
+          >
+            <SortP 
+            clickColour={amountColour} 
+            >
+              Amount
+            </SortP>   
+          </li>
         </SortList>
       </SortContainer>
     </Cont>

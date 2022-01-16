@@ -46,6 +46,10 @@ export default function Home() {
   //daily expense array
   const [filteredExpenses, setFilteredExpenses] = useState([]);
 
+  //clicking on sort will change text colour states
+  const [nameClickColour, setNameClickColour] = useState("black");
+  const [amountClickColour, setAmountClickColour] = useState("black");
+
   //update when date is changed
   useEffect(() => {
     filterDate();
@@ -107,26 +111,24 @@ export default function Home() {
 
   //Sort by date
   //not sure how this could be used, since we have a calender that filters expense dates already for the user
-  const sortDatesDesc = () => {
-    function compareDates(a, b){
-      if(a < b){
-        return -1;
-      }
-      if(a > b){
-        return 1;
-      }
-
-      return 0;
-    }
-
-    expenseDates.sort(compareDates);
-
-    // console.log("ASCENDING EXPENSE DATES: " + expenseDates);
-  }
-
   const sortDatesAsc = () => {
     function compareDates(a, b){
       if(a < b){
+        return -1;
+      }
+      if(a > b){
+        return 1;
+      }
+
+      return 0;
+    }
+
+    filteredExpenses.sort(compareDates);
+  }
+
+  const sortDatesDesc = () => {
+    function compareDates(a, b){
+      if(a < b){
         return 1;
       }
       if(a > b){
@@ -136,9 +138,7 @@ export default function Home() {
       return 0;
     }
 
-    expenseDates.sort(compareDates);
-
-    // console.log("DESCENDING EXPENSE DATES: " + expenseDates);
+    filteredExpenses.sort(compareDates);
   }
 
   //Sort by name
@@ -168,14 +168,21 @@ export default function Home() {
     })
   }
 
-  var nameSortClick = 0;
+  const nameSortClick = 0;
+  //reset clicked sort colour when date is changed
+  useEffect(() => {
+    setNameClickColour("black");
+    setAmountClickColour("black");
+  }, [date]);
 
   const handleNameSort = () => {
     nameSortClick += 1;
 
     if(nameSortClick % 2 == 1){
+      setNameClickColour("blue");
       sortNameAsc();
     } else if(nameSortClick % 2 == 0){
+      setNameClickColour("purple");
       sortNameDesc();
     }
   }
@@ -199,8 +206,10 @@ export default function Home() {
     amountSortClick += 1;
 
     if(amountSortClick % 2 == 1){
+      setAmountClickColour("blue");
       sortAmountAsc();
     } else if(amountSortClick % 2 == 0){
+      setAmountClickColour("purple");
       sortAmountDesc();
     }
   }
@@ -241,6 +250,8 @@ export default function Home() {
         <ItemFilterIcons
           onClickName={handleNameSort}
           onClickAmount={handleAmountSort}
+          nameColour={nameClickColour}
+          amountColour={amountClickColour}
         />
         <Itemheadings />
         <ItemChart expenses={expenses}
