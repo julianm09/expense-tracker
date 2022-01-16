@@ -168,12 +168,13 @@ export default function Home() {
     })
   }
 
-  const nameSortClick = 0;
   //reset clicked sort colour when date is changed
   useEffect(() => {
     setNameClickColour("black");
     setAmountClickColour("black");
   }, [date]);
+
+  const nameSortClick = 0;
 
   const handleNameSort = () => {
     nameSortClick += 1;

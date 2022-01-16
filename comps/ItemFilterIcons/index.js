@@ -37,8 +37,14 @@ const SortList = styled.ul`
   justify-content: space-between;
 `;
 
-const SortP = styled.p`
+const SortP = styled.button`
+  background: none;
+  border: none;
+  font-size: 1.2rem;
   color: ${props=>props.clickColour};
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 
@@ -99,7 +105,7 @@ export default function ItemFilterIcons({
       <SortContainer>
         Sort By:
         <SortList>
-          <li 
+          <li
           onClick={onClickName} 
           >
             <SortP
