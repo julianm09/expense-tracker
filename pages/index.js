@@ -111,29 +111,30 @@ export default function Home() {
   //Filter expenses by amount
 
   //Sort by date
-  useEffect(() => {
-    getDates();
-  }, [expenses]);
+  
+  // useEffect(() => {
+  //   getDates();
+  // }, [expenses]);
 
-  const expenseDates = [];
+  // const expenseDates = [];
 
-  const getDates = () => {
-    if(expenses.date === date){
-      try{
-        const o = expenses;
+  // const getDates = () => {
+  //   if(expenses.date === date){
+  //     try{
+  //       const o = expenses;
 
-        for(let i = 0; i < expenses.length; i++){
-          expenseDates.push(o[i].date);
-        }
+  //       for(let i = 0; i < expenses.length; i++){
+  //         expenseDates.push(o[i].date);
+  //       }
 
-        console.log("EXPENSE DATES ARRAY: " + expenseDates);
+  //       console.log("EXPENSE DATES ARRAY: " + expenseDates);
 
-        return expenseDates;
-      } catch(e){
-        console.log("ERROR IN getDates: " + e)
-      }
-    }
-  }
+  //       return expenseDates;
+  //     } catch(e){
+  //       console.log("ERROR IN getDates: " + e)
+  //     }
+  //   }
+  // }
 
   const sortDatesDesc = () => {
     function compareDates(a, b){
@@ -170,6 +171,7 @@ export default function Home() {
   }
 
   //Sort by name
+
   // useEffect(() => {
   //   getNames();
   // }, [filteredExpenses]);
@@ -212,49 +214,66 @@ export default function Home() {
     })
   }
 
-  //Sort by amount
-  useEffect(() => {
-    getExpenseAmounts();
-  }, [expenses]);
+  var nameSortClick = 0;
 
-  const expenseAmounts = [];
+  const handleNameSort = () => {
+    nameSortClick += 1;
 
-  const getExpenseAmounts = () => {
-    try{
-      for(let i = 0; i < expenses.length; i++){
-        var e = expenses[i];
-        for(let k = 0; k < expenses.length; k++){
-          expenseAmounts.push(e.expenses[k].price);
-        }
-      }
-    } catch(e){
-      console.log("getExpenseAmounts Error: " + e);
+    if(nameSortClick % 2 == 1){
+      sortNameAsc();
+    } else if(nameSortClick % 2 == 0){
+      sortNameDesc();
     }
-
-    // console.log("EXPENSE AMOUNTS: " + expenseAmounts);
   }
+
+  //Sort by amount
+
+  // useEffect(() => {
+  //   getExpenseAmounts();
+  // }, [expenses]);
+
+  // const expenseAmounts = [];
+
+  // const getExpenseAmounts = () => {
+  //   try{
+  //     for(let i = 0; i < expenses.length; i++){
+  //       var e = expenses[i];
+  //       for(let k = 0; k < expenses.length; k++){
+  //         expenseAmounts.push(e.expenses[k].price);
+  //       }
+  //     }
+  //   } catch(e){
+  //     console.log("getExpenseAmounts Error: " + e);
+  //   }
+
+  //   // console.log("EXPENSE AMOUNTS: " + expenseAmounts);
+  // }
 
   // getExpenseAmounts();
 
   const sortAmountAsc = () => {
-    expenseAmounts.sort((a, b) => {
-      return a - b;
+    filteredExpenses.sort((a, b) => {
+      return a.price - b.price;
     })
-
-    // console.log("ASCENDING EXPENSES: " + expenseAmounts);
   }
-
-  sortAmountAsc();
 
   const sortAmountDesc = () => {
-    expenseAmounts.sort((a, b) => {
-      return b - a;
+    filteredExpenses.sort((a, b) => {
+      return b.price - a.price;
     })
-
-    // console.log("DESCENDING EXPENSES: " + expenseAmounts);
   }
 
-  sortAmountDesc();
+  const amountSortClick = 0;
+
+  const handleAmountSort = () => {
+    amountSortClick += 1;
+
+    if(amountSortClick % 2 == 1){
+      sortAmountAsc();
+    } else if(amountSortClick % 2 == 0){
+      sortAmountDesc();
+    }
+  }
 
   //Add Total expenses from day
 
@@ -282,7 +301,6 @@ export default function Home() {
 
   return (
     <Cont>
-      <AddButton handleClick={sortNameAsc} />
       <SetBudget/>
       <Column>
         <MyCalender date={date} setDate={setDate} />
@@ -290,7 +308,10 @@ export default function Home() {
 
       <Column>
       <DisplayTotal/>
-        <ItemFilterIcons/>
+        <ItemFilterIcons
+          onClickName={handleNameSort}
+          onClickAmount={handleAmountSort}
+        />
         <Itemheadings />
         <ItemChart expenses={expenses}
               date={date}
