@@ -10,6 +10,7 @@ import AddButton from "../comps/Button";
 import DisplayTotal from "../comps/DisplayTotal";
 import ItemChart from "../comps/ItemChart";
 import SetBudget from '../comps/SetBudjet';
+import ItemFilterIcons from "../comps/ItemFilterIcons";
 
 export default function Home() {
 
@@ -210,6 +211,7 @@ export default function Home() {
 
       <Column>
       <DisplayTotal/>
+        <ItemFilterIcons/>
         <Itemheadings />
         <ItemChart expenses={expenses}
               date={date}

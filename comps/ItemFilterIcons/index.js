@@ -24,23 +24,27 @@ const filterhead = styled.p`
 
 export default function ItemFilterIcons() {
 
-    const [showFood, setShowFood] = useState(false);
-    const [showTravel, setShowTravel] = useState(false);
-    const [showUtils, setShowUtils] = useState(false);
+    // const [showFood, setShowFood] = useState(false);
+    // const [showTravel, setShowTravel] = useState(false);
+    // const [showUtils, setShowUtils] = useState(false);
 
-    const setFood = () => showFood(true);
-    const setTravel = () => showTravel(true);
-    const setUtils = () => showUtils(true);
+    // const setFood = () => showFood(true);
+    // const setTravel = () => showTravel(true);
+    // const setUtils = () => showUtils(true);
 
+    const [filter, setFilter] = useState('all')
 
   return (
     <Cont>
       <filterhead>Filter By:</filterhead>
-      <GiForkKnifeSpoon onClick={()=>{setFood}}/>
+      {/* <GiForkKnifeSpoon onClick={()=>{setFood}}/>
       <MdAirportShuttle onClick={()=>{setTravel}}/>
-      <MdHardware onClick={()=>{setUtils}}/>      <GiForkKnifeSpoon onClick={()=>{setFood}}/>
-      <MdAirportShuttle onClick={()=>{setTravel}}/>
-      <MdHardware onClick={()=>{setUtils}}/>
+      <MdHardware onClick={()=>{setUtils}}/>       */}
+
+      <GiForkKnifeSpoon onClick={()=>{setFilter('food')}}/>
+      <MdAirportShuttle onClick={()=>{setFilter('travel')}}/>
+      <MdHardware onClick={()=>{setFilter('utils')}}/>    
+      
     </Cont>
   );
 }
