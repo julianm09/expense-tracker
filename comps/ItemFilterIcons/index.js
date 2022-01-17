@@ -36,6 +36,18 @@ const SortList = styled.ul`
   justify-content: space-between;
 `;
 
+
+const SortP = styled.button`
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: ${props=>props.clickColour};
+  &:hover{
+    cursor: pointer;
+  }
+`;
+
+
 const Filter = styled.div`
   width: 40px;
   height: 40px;
@@ -50,11 +62,17 @@ const Filter = styled.div`
   border: ${(props) => props.border};
 `;
 
+
 export default function ItemFilterIcons({
   onClickName,
   onClickAmount,
+
+  nameColour,
+  amountColour,
+
   setFilter,
   filter,
+
 }) {
   return (
     <Cont>
@@ -104,13 +122,29 @@ export default function ItemFilterIcons({
         </Filter>
       </FilterContainer>
 
-{/*       <SortContainer>
+  <SortContainer>
         Sort By:
         <SortList>
-          <li onClick={onClickName}>Name</li>
-          <li onClick={onClickAmount}>Amount</li>
+          <li
+          onClick={onClickName} 
+          >
+            <SortP
+            clickColour={nameColour} 
+            >
+              Name
+            </SortP>
+          </li>
+          <li 
+          onClick={onClickAmount} 
+          >
+            <SortP 
+            clickColour={amountColour} 
+            >
+              Amount
+            </SortP>   
+          </li>
         </SortList>
-      </SortContainer> */}
+      </SortContainer> 
     </Cont>
   );
 }
