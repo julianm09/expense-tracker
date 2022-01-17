@@ -15,22 +15,25 @@ const Cont = styled.div`
   margin: 0 0 50px 0;
 `;
 
-export default function ItemChart({ expenses, date, filteredExpenses, deleteExpense, editExpense, filter}) {
-  return <Cont>
-     
-     
-    <DisplayExpense
-              expenses={expenses}
-              date={date}
-
-              filteredExpenses={filteredExpenses}/>
-              
-
-              filteredExpenses={filteredExpenses}
-              deleteExpense={deleteExpense}
-              editExpense={editExpense}
-              filter={filter}
-              />
-
-    </Cont>;
+export default function ItemChart({
+  expenses,
+  date,
+  filteredExpenses,
+  deleteExpense,
+  editExpense,
+  filter,
+}) {
+  return (
+    <Cont>
+      <DisplayExpense
+        expenses={expenses}
+        date={date}
+        filteredExpenses={filteredExpenses}
+        filteredExpenses={filteredExpenses}
+        deleteExpense={deleteExpense}
+        editExpense={editExpense}
+        filter={filter}
+      />
+    </Cont>
+  );
 }

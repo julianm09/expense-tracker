@@ -11,17 +11,15 @@ const Cont = styled.div`
   border-radius: 20px;
   justify-content: center;
   align-items: center;
-  margin: 0px 0 10px 0;
+  margin: 0px 0 40px 0;
+  font-weight: 700;
+  color: ${(props) => props.color};
 `;
 
-
-export default function DisplayTotal(
-{ totalSum }
-){
-return <Cont>{totalSum}</Cont>;
+export default function DisplayTotal({ totalSum, budget }) {
+  return (
+    <Cont color={budget >= totalSum ? "#006EDC" : "#D10404"}>
+      Expenses: ${parseFloat(totalSum).toFixed(2)}
+    </Cont>
+  );
 }
-
-export default function DisplayTotal({ total = "100" }) {
-  return <Cont>Total: ${100}</Cont>;
-}
-

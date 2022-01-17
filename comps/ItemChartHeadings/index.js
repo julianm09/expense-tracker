@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
 
 const Cont = styled.div`
   display: flex;
@@ -15,10 +16,18 @@ const Title = styled.div`
   font-size: 18px;
   color: #737373;
   font-weight: 700;
+  cursor: pointer;
+  margin: 0 10px 0 0;
+
+  color: ${props => props.clickColour};
 `;
 
 const Titlecont = styled.div`
   width: 151px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
 `;
 
 const Iconcont = styled.div`
@@ -31,19 +40,26 @@ const Iconcont = styled.div`
   color: #6d6d6d;
 `;
 
-export default function Itemheadings() {
+export default function Itemheadings({
+  onClickName,
+  onClickAmount,
+  nameColour,
+  amountColour,
+}) {
   return (
     <Cont>
       <Titlecont>
-        <Title>Expense</Title>
+<Title onClick={onClickName} clickColour={nameColour === "down" || nameColour === "up" ?  "#006EDC" : "#737373"}>Expense</Title>
+        {nameColour === "down" ? <BsFillCaretDownFill color={'#006EDC'} /> : nameColour === "up" ? <BsFillCaretUpFill color={'#006EDC'} /> : <BsFillCaretDownFill color={'#737373'} /> }
       </Titlecont>
 
       <Titlecont>
-        <Title>Type</Title>
+        <Title > Type</Title>
       </Titlecont>
 
       <Titlecont>
-        <Title>Amount</Title>
+        <Title onClick={onClickAmount} clickColour={amountColour === "down" || amountColour === "up" ?  "#006EDC" : "#737373"}>Amount</Title>
+        {amountColour === "down" ? <BsFillCaretDownFill color={'#006EDC'} /> : amountColour === "up" ? <BsFillCaretUpFill color={'#006EDC'} /> : <BsFillCaretDownFill color={'#737373'} /> }
       </Titlecont>
 
       <Iconcont></Iconcont>

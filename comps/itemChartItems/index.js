@@ -16,7 +16,7 @@ const Itemcont = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 18px;
+  font-size: 16px;
   color: #737373;
 `;
 

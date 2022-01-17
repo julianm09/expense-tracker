@@ -3,12 +3,30 @@ import styled from "styled-components";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
+const Cont = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 80%;
+
+`;
+
 const CalenderUI = styled(Calendar)`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border: none;
+  width: 100%;
+  background: white;
+  color: #6d6d6d;
+  
+
+  @media(max-width: 1000px){
+    margin: 0 0 40px 0;
+  }
 `;
 
 export default function MyCalender({ date, setDate }) {
@@ -26,8 +44,8 @@ export default function MyCalender({ date, setDate }) {
   }, [value]);
 
   return (
-    <div>
+    <Cont>
       <CalenderUI onChange={onChange} value={value} />
-    </div>
+    </Cont>
   );
 }

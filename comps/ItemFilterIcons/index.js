@@ -10,6 +10,11 @@ const Cont = styled.div`
   height: 75px;
   justify-content: space-between;
   align-items: center;
+
+  @media(max-width: 1200px){
+    flex-direction: column;
+  }
+  
 `;
 
 const FilterContainer = styled.div`
@@ -17,41 +22,41 @@ const FilterContainer = styled.div`
   width: 100%;
   height: 100%;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 16px;
 `;
 
 const SortContainer = styled.div`
   display: flex;
   width: 40%;
   height: 100%;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 16px;
 `;
 
-const SortList = styled.ul`
+const SortList = styled.div`
   list-style-type: none;
   display: flex;
   flex: 1;
   justify-content: space-between;
 `;
 
-
 const SortP = styled.button`
   background: none;
   border: none;
-  font-size: 1.2rem;
-  color: ${props=>props.clickColour};
-  &:hover{
+  font-size: 16px;
+  width: 100px;
+  font-family: Karla;
+  color: ${(props) => props.clickColour};
+  &:hover {
     cursor: pointer;
   }
 `;
 
-
 const Filter = styled.div`
   width: 40px;
   height: 40px;
-  margin: 0 0 0 25px ;
+  margin: 0 0 0 25px;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -62,7 +67,6 @@ const Filter = styled.div`
   border: ${(props) => props.border};
 `;
 
-
 export default function ItemFilterIcons({
   onClickName,
   onClickAmount,
@@ -72,14 +76,13 @@ export default function ItemFilterIcons({
 
   setFilter,
   filter,
-
 }) {
   return (
     <Cont>
       <FilterContainer>
         Filter By:
         <Filter
-        style={{fontSize: '14px'}}
+          style={{ fontSize: "14px" }}
           color={filter === "All" ? "#006EDC" : "#6d6d6d"}
           border={
             filter === "All" ? "0.5px solid #006EDC" : "0.5px solid #6d6d6d"
@@ -122,29 +125,21 @@ export default function ItemFilterIcons({
         </Filter>
       </FilterContainer>
 
-  <SortContainer>
+{/*       <SortContainer>
+        
+        <SortP>
         Sort By:
-        <SortList>
-          <li
-          onClick={onClickName} 
-          >
-            <SortP
-            clickColour={nameColour} 
-            >
-              Name
-            </SortP>
-          </li>
-          <li 
-          onClick={onClickAmount} 
-          >
-            <SortP 
-            clickColour={amountColour} 
-            >
-              Amount
-            </SortP>   
-          </li>
-        </SortList>
-      </SortContainer> 
+          </SortP>
+
+          <SortP onClick={onClickName} clickColour={nameColour}>
+            Name
+          </SortP>
+
+          <SortP clickColour={amountColour} onClick={onClickAmount}>
+            Amount
+          </SortP>
+    
+      </SortContainer> */}
     </Cont>
   );
 }

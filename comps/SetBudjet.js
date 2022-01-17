@@ -6,14 +6,23 @@ const Container = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin: 0px 0 25px 0;
+  margin: 0px 0 10px 0;
   font-family: Karla;
   width: 80%;
+
+  @media(max-width: 1200px){
+    flex-direction: column;
+  }
 `;
 
 const InputCont = styled.div`
   display: flex;
   flex-direction: row;
+  width: 50%;
+
+  @media(max-width: 1200px){
+    width: 100%;
+  }
 `;
 
 const InputBox = styled.input`
@@ -25,6 +34,7 @@ const InputBox = styled.input`
   border-radius: 10px;
   border: 0.5px solid black;
   margin: 0 10px 0 0;
+  width: 100%;
 `;
 
 const Button = styled.button`
@@ -43,18 +53,27 @@ const Card = styled.div`
   justify-content: center;
   align-items: center;
   height: 40px;
+  width: 100%;
   font-size: 16px;
-  color: black;
+  color: white;
+  padding: 0 10px;
+background: #006EDC;
+  border-radius: 10px;
+  border: 0.5px solid #006EDC;
+  margin: 0 0 0 10px;
+  @media(max-width: 1200px){
+  margin: 10px 0 0 0;
+  }
 
 /*   background-color: ${(props) => props.bgcolor}; */
 `;
 
-export default function Home({ bgcolor = "#000" }) {
-  const [data, setData] = useState(null);
+export default function Home({ bgcolor = "#000", budget, setBudget }) {
+
   const [print, setPrint] = useState(false);
 
   function getData(val) {
-    setData(val.target.value);
+    setBudget(val.target.value);
     setPrint(false);
   }
 
@@ -73,7 +92,7 @@ export default function Home({ bgcolor = "#000" }) {
 
       {print ? (
         <InputCont>
-          <Card bgcolor={bgcolor}>{'Your Daily Budget: $' + data}</Card>{" "}
+          <Card bgcolor={bgcolor}>{'Your Daily Budget: $' + parseFloat(budget).toFixed(2)}</Card>{" "}
         </InputCont>
       ) : null}
     </Container>

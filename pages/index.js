@@ -47,8 +47,8 @@ export default function Home() {
   const [filteredExpenses, setFilteredExpenses] = useState([]);
 
   //clicking on sort will change text colour states
-  const [nameClickColour, setNameClickColour] = useState("black");
-  const [amountClickColour, setAmountClickColour] = useState("black");
+  const [nameClickColour, setNameClickColour] = useState("none");
+  const [amountClickColour, setAmountClickColour] = useState("none");
 
   //update when date is changed
   useEffect(() => {
@@ -58,7 +58,15 @@ export default function Home() {
   //upate when expenses are added
   useEffect(() => {
     filterDate();
+
+ 
   }, [expenses]);
+
+/*   useEffect(() => {
+    if(localStorage.getItem('expenses')){
+    setExpenses(localStorage.getItem('expenses'))
+    }
+  }, []); */
 
   //filter expenses by date
   const filterDate = () => {
@@ -104,19 +112,11 @@ export default function Home() {
   //Filter expenses by date
   const [filter, setFilter] = useState("All");
 
-  //Filter expenses by name
-
-  //Filter expenses by amount
   
-
- // Array.prototype.sum = function() {return [].reduce.call(this, (a,i) => a+i, 0);}
-
- //setSumTotal ={}
-
 
   //Sort by date
 
-  const expenseDates = [];
+  /* const expenseDates = [];
 
   const getDates = async () => {
     try {
@@ -126,8 +126,6 @@ export default function Home() {
         expenseDates.push(o[i].date);
       }
 
-      /*       console.log("EXPENSE DATES ARRAY: " + expenseDates); */
-
       return expenseDates;
     } catch (e) {
       console.log("ERROR IN GETDATES: " + e);
@@ -135,8 +133,6 @@ export default function Home() {
   };
 
   getDates();
-
-  //not sure how this could be used, since we have a calender that filters expense dates already for the user
 
   const sortDatesAsc = () => {
     function compareDates(a, b){
@@ -160,8 +156,9 @@ export default function Home() {
       if(a < b){
 
     expenseDates.sort(compareDates);
+      }
 
-    // console.log("ASCENDING EXPENSE DATES: " + expenseDates);
+      }
   };
 
   const sortDatesAsc = () => {
@@ -179,13 +176,10 @@ export default function Home() {
 
 
     filteredExpenses.sort(compareDates);
-  }
-
+  
     expenseDates.sort(compareDates);
 
-    // console.log("DESCENDING EXPENSE DATES: " + expenseDates);
-  };
-
+  }; */
 
   const sortNameAsc = () => {
     filteredExpenses.sort((a, b) => {
@@ -215,8 +209,8 @@ export default function Home() {
 
   //reset clicked sort colour when date is changed
   useEffect(() => {
-    setNameClickColour("black");
-    setAmountClickColour("black");
+    setNameClickColour("#737373");
+    setAmountClickColour("#737373");
   }, [date]);
 
   const nameSortClick = 0;
@@ -224,18 +218,17 @@ export default function Home() {
   const handleNameSort = () => {
     nameSortClick += 1;
 
-
-    if(nameSortClick % 2 == 1){
-      setNameClickColour("blue");
-      sortNameAsc();
-    } else if(nameSortClick % 2 == 0){
-      setNameClickColour("purple");
-
     if (nameSortClick % 2 == 1) {
-      sortNameAsc();
-    } else if (nameSortClick % 2 == 0) {
-
+      setNameClickColour("down");
       sortNameDesc();
+    } else if (nameSortClick % 2 == 0) {
+      setNameClickColour("up");
+
+      if (nameSortClick % 2 == 1) {
+        sortNameDesc();
+      } else if (nameSortClick % 2 == 0) {
+        sortNameAsc();
+      }
     }
   };
 
@@ -257,43 +250,31 @@ export default function Home() {
   const handleAmountSort = () => {
     amountSortClick += 1;
 
-
-    if(amountSortClick % 2 == 1){
-      setAmountClickColour("blue");
-      sortAmountAsc();
-    } else if(amountSortClick % 2 == 0){
-      setAmountClickColour("purple");
-
     if (amountSortClick % 2 == 1) {
+      setAmountClickColour("down");
       sortAmountAsc();
     } else if (amountSortClick % 2 == 0) {
+      setAmountClickColour("up");
 
-      sortAmountDesc();
+      if (amountSortClick % 2 == 1) {
+        sortAmountAsc();
+      } else if (amountSortClick % 2 == 0) {
+        sortAmountDesc();
+      }
     }
   };
 
   //Add Total expenses from day
-  console.log(filteredExpenses.map((x) => x.price));
+  const sum = filteredExpenses.map((x) => x.price);
 
+  function add(array) {
+    var total = 0;
 
-
-  const sum = filteredExpenses.map(x => x.price)
-
-function add(array){
-  var total = 0;
-
-  for ( var i = 0; i < sum.length; i++){
-    total += +sum[i]
+    for (var i = 0; i < sum.length; i++) {
+      total += +sum[i];
+    }
+    return total;
   }
-  return total;
-}
-
-//console.log(add(sum))
-
- //console.log(filteredExpenses.map(x => x.price)); 
-  //Set Daily Budget
-
-  //Calculate Budget and Total Expense Difference
 
   //Delete an Expense
   const deleteExpense = (i) => {
@@ -309,8 +290,9 @@ function add(array){
   const [editingExpense, setEditingExpense] = useState(false);
   const [editId, setEditId] = useState(null);
 
-  //Edit an Expense
+  const [budget, setBudget] = useState(null);
 
+  //Edit an Expense
 
   const editExpense = (i) => {
     //open popup with inputs filled
@@ -349,33 +331,30 @@ function add(array){
     setEditingExpense(false);
   };
 
-
   return (
     <Cont>
       <Column>
-        <DisplayTotal />
-        <SetBudget />
+        <SetBudget budget={budget} setBudget={setBudget}/>
+        <DisplayTotal totalSum={add(sum)} budget={budget}/>
         <MyCalender date={date} setDate={setDate} />
       </Column>
 
       <Column>
-
-      <DisplayTotal totalSum={add(sum)}  />
-
         <ItemFilterIcons
           onClickName={handleNameSort}
           onClickAmount={handleAmountSort}
-
           nameColour={nameClickColour}
           amountColour={amountClickColour}
-
           filter={filter}
           setFilter={setFilter}
-
         />
 
-
-        <Itemheadings />
+        <Itemheadings
+          onClickName={handleNameSort}
+          onClickAmount={handleAmountSort}
+          nameColour={nameClickColour}
+          amountColour={amountClickColour}
+        />
         <ItemChart
           expenses={expenses}
           date={date}
@@ -418,6 +397,7 @@ const Cont = styled.div`
   @media (max-width: 1000px) {
     flex-direction: column;
     height: auto;
+    padding: 40px 0;
   }
 `;
 
