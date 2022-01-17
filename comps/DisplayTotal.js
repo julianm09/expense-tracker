@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Cont = styled.div`
   display: flex;
-  width: 60%;
+  width: 80%;
   height: 75px;
   border: 0.5px solid #000000;
   box-sizing: border-box;
@@ -11,11 +11,17 @@ const Cont = styled.div`
   border-radius: 20px;
   justify-content: center;
   align-items: center;
-  margin: 50px 0;
+  margin: 0px 0 10px 0;
 `;
+
 
 export default function DisplayTotal(
 { totalSum }
 ){
 return <Cont>{totalSum}</Cont>;
 }
+
+export default function DisplayTotal({ total = "100" }) {
+  return <Cont>Total: ${100}</Cont>;
+}
+

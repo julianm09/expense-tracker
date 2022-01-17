@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import AddButton from "./Button";
-import Dropdown from "./dropdown";
+import {Dropdown}
 
 const Overlay = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ const Overlay = styled.div`
   left: 0;
   flex-direction: column;
 
-  @media (max-width: 1000px) {
+  @media(max-width: 1000px){
     width: 100%;
   }
 `;
@@ -96,62 +96,30 @@ const BottomDiv = styled.div`
   color: #fff;
   border-radius: 10px;
 `; */
-export default function PopUp({
-  setShowAddItem,
-  addExpense,
-  setExpensePrice,
-  setExpenseName,
-  setExpenseType,
-  expensePrice,
-  expenseName,
-  expenseType,
-  editingExpense,
-  addEditExpense,
-}) {
-  const options = [
-    { key: 1, text: "Choice 1", value: 1 },
-    { key: 2, text: "Choice 2", value: 2 },
-    { key: 3, text: "Choice 3", value: 3 },
-  ];
-
+export default function PopUp({setShowAddItem, addExpense, setExpensePrice, setExpenseName, setExpenseType, expensePrice, expenseName, expenseType}) {
   return (
     <Overlay>
-      <Background onClick={() => setShowAddItem(false)} />
-      <Cont>
-        <XButton onClick={() => setShowAddItem(false)}>x</XButton>
-        <TopDiv>
-          <TextCont>
-            <Title>Item Name</Title>
-            <Box
-              onChange={(e) => setExpenseName(e.target.value)}
-              value={expenseName}
-            />
-          </TextCont>
-          <TextCont>
-            <Title>Item Price</Title>
-            <Box
-              type={"number"}
-              step="0.01"
-              onChange={(e) => setExpensePrice(e.target.value)}
-              value={expensePrice}
-            />
-          </TextCont>
-          <TextCont>
-            <Title>Type</Title>
-            <Dropdown
-              expenseType={expenseType}
-              setExpenseType={setExpenseType}
-            />
-          </TextCont>
-          <BottomDiv>
-            {editingExpense ? (
-              <AddButton text="EDIT EXPENSE" handleClick={addEditExpense} />
-            ) : (
-              <AddButton handleClick={addExpense} />
-            )}
-          </BottomDiv>
-        </TopDiv>
-      </Cont>
+        <Background onClick={() => setShowAddItem(false)} />
+    <Cont>
+      <XButton onClick={() => setShowAddItem(false)}>x</XButton>
+      <TopDiv>
+        <TextCont>
+          <Title>Item Name</Title>
+          <Box onChange={(e) => setExpenseName(e.target.value)} value={expenseName}/>
+        </TextCont>
+        <TextCont>
+          <Title>Item Price</Title>
+          <Box type={"number"} step="0.01" onChange={(e) => setExpensePrice(e.target.value)} value={expensePrice}/>
+        </TextCont>
+        <TextCont>
+          <Title>Type</Title>
+          <Box onChange={(e) => setExpenseType(e.target.value)} value={expenseType}/>
+        </TextCont>
+        <BottomDiv>
+          <AddButton handleClick={addExpense}/>
+        </BottomDiv>
+      </TopDiv>
+    </Cont>
     </Overlay>
   );
 }

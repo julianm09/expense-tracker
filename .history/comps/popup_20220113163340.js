@@ -105,8 +105,6 @@ export default function PopUp({
   expensePrice,
   expenseName,
   expenseType,
-  editingExpense,
-  addEditExpense,
 }) {
   const options = [
     { key: 1, text: "Choice 1", value: 1 },
@@ -139,16 +137,12 @@ export default function PopUp({
           <TextCont>
             <Title>Type</Title>
             <Dropdown
-              expenseType={expenseType}
-              setExpenseType={setExpenseType}
+              onChange={(e) => setExpenseType(e.target.value)}
+              value={expenseType}
             />
           </TextCont>
           <BottomDiv>
-            {editingExpense ? (
-              <AddButton text="EDIT EXPENSE" handleClick={addEditExpense} />
-            ) : (
-              <AddButton handleClick={addExpense} />
-            )}
+            <AddButton handleClick={addExpense} />
           </BottomDiv>
         </TopDiv>
       </Cont>
