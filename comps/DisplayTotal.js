@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 
 const Cont = styled.div`
@@ -14,6 +14,14 @@ const Cont = styled.div`
   margin: 0px 0 10px 0;
 `;
 
+
+export default function DisplayTotal(
+{ totalSum }
+){
+return <Cont>{totalSum}</Cont>;
+}
+
 export default function DisplayTotal({ total = "100" }) {
   return <Cont>Total: ${100}</Cont>;
 }
+

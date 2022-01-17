@@ -103,6 +103,12 @@ export default function Home() {
   //Filter expenses by name
 
   //Filter expenses by amount
+  
+
+ // Array.prototype.sum = function() {return [].reduce.call(this, (a,i) => a+i, 0);}
+
+ //setSumTotal ={}
+
 
   //Sort by date
 
@@ -228,6 +234,22 @@ export default function Home() {
   //Add Total expenses from day
   console.log(filteredExpenses.map((x) => x.price));
 
+
+
+  const sum = filteredExpenses.map(x => x.price)
+
+function add(array){
+  var total = 0;
+
+  for ( var i = 0; i < sum.length; i++){
+    total += +sum[i]
+  }
+  return total;
+}
+
+//console.log(add(sum))
+
+ //console.log(filteredExpenses.map(x => x.price)); 
   //Set Daily Budget
 
   //Calculate Budget and Total Expense Difference
@@ -247,6 +269,7 @@ export default function Home() {
   const [editId, setEditId] = useState(null);
 
   //Edit an Expense
+
 
   const editExpense = (i) => {
     //open popup with inputs filled
@@ -285,6 +308,7 @@ export default function Home() {
     setEditingExpense(false);
   };
 
+
   return (
     <Cont>
       <Column>
@@ -294,12 +318,16 @@ export default function Home() {
       </Column>
 
       <Column>
+
+      <DisplayTotal totalSum={add(sum)}  />
+
         <ItemFilterIcons
           onClickName={handleNameSort}
           onClickAmount={handleAmountSort}
           filter={filter}
           setFilter={setFilter}
         />
+
 
         <Itemheadings />
         <ItemChart
